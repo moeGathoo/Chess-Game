@@ -1,40 +1,45 @@
+/**
+ * @brief Plays a game of chess for 10 full moves
+ * compile command:
+ * * g++ chess.cpp helpers/state.cpp helpers/board.cpp helpers/moves.cpp helpers/engine.cpp -o chess
+ * execute command:
+ * * ./chess rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1
+ */
+
 #include "headers.h"
 
-char pieceTypes[6] = {'r', 'n', 'b', 'q', 'k', 'p'};
-int pieceValues[6] = {50, 30, 30, 90, 900, 10};
-cell board[RANK][RANK];
-vector<cell*> black[PIECES];
-vector<cell*> white[PIECES];
+//initializes values of all global variables
+char pieceTypes[6] = {'r', 'n', 'b', 'q', 'k', 'p'};    //types of pieces on board
+int pieceValues[6] = {50, 30, 30, 90, 900, 10};         //piece weightings for search and evaluation algorithms
+cell board[RANK][RANK];                                 //board to play on
+vector<cell*> black[PIECES];                            //array of vectors for each piece type (pointers to spaces on baord that have the piece)
+vector<cell*> white[PIECES];                            //array of vectors for each piece type (pointers to spaces on baord that have the piece)
 
+/**
+ * @brief main function to play game
+ * 
+ * @param argc number of arguments
+ * @param argv each argument pertains to a particular part of fen notation
+ * ? argv[0]: fen string representation of board
+ * ? argv[1]: side to play
+ * ? argv[2]: castling rights
+ * ? argv[3]: en passant move //! not implemented
+ * ? argv[4]: half moves (total moves since pawn move or piece capture)
+ * ? argv[5]: full moves (increments by 1 after black moves)
+ * @return int 
+ */
 int main(int argc, char* argv[]) {
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
-
+    //set up board
     initBoard(game.fen);
-    // printBoard();
-    
-    vector<cell*>* pieces; vector<string> moves;
-    if (game.side == 'b') pieces = black;
-    else pieces = white;
-    for (int i = 0; i < PIECES; i++)
-        if (pieces[i].size() != 0)
-            for (cell* piece : pieces[i])
-                pieceMoves(&game, piece, i, &moves);
 
+    //plays game up to 10 full moves using alpha-beta pruning algorithm
+    //prints move made
     for (int i = 0; i < 10; i++) {
         string move;
-        miniMax(game, 4, &move, true);
-        checkMove(&game, &move);
-        // printBoard();
+        alphaBeta(game, 4, -10001, 10001, &move, true);
+        checkMove(&game, &move);\
         cout << move << endl;
     }
     return 0;
 }
-
-//compile command:
-//g++ chess.cpp helpers/state.cpp helpers/board.cpp helpers/moves.cpp helpers/engine.cpp -o chess
-//execute command
-//./chess rnbqkbnr/ppp2ppp/3pp3/8/6P1/3PP3/PPP2P1P/RNBQKBNR b KQkq - 0 3
-
-    // string move;
-    // alphaBeta(game, 4, -10001, 10001, &move, true);
-    // cout << endl << move << endl;

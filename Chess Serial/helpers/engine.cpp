@@ -1,6 +1,11 @@
 #include "../headers.h"
 
-
+/**
+ * @brief Evaluates the board for the current side to play.
+ * 
+ * @param state 
+ * @return int 
+ */
 int evaluation(state* state) {
     int rawScore = 0;
     if (black[4].size() == 0 && white[4].size() == 0) return 0;
