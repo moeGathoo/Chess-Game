@@ -78,10 +78,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="chess.cu" />
-    <CudaCompile Include="helpers\File.cu" />
+    <CudaCompile Include="helpers\board.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.cuh" />
+    <ClInclude Include="headers.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
