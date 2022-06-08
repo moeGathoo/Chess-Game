@@ -16,16 +16,17 @@ vector<cell*> black[PIECES];                            //array of vectors for e
 vector<cell*> white[PIECES];                            //array of vectors for each piece type (pointers to spaces on baord that have the piece)
 
 /**
- * @brief main function to play game
+ * @brief Main function to play game.
  * 
- * @param argc number of arguments
- * @param argv each argument pertains to a particular part of fen notation
+ * @param argc Number of arguments.
+ * @param argv Each argument pertains to a particular part of fen notation.
  * ? argv[0]: fen string representation of board
  * ? argv[1]: side to play
  * ? argv[2]: castling rights
- * ? argv[3]: en passant move //! not implemented
+ * ? argv[3]: en passant move
  * ? argv[4]: half moves (total moves since pawn move or piece capture)
  * ? argv[5]: full moves (increments by 1 after black moves)
+ * 
  * @return int 
  */
 int main(int argc, char* argv[]) {
@@ -38,8 +39,9 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < 10; i++) {
         string move;
         alphaBeta(game, 4, -10001, 10001, &move, true);
-        checkMove(&game, &move);\
+        checkMove(&game, &move);
         cout << move << endl;
+        if (game.gameOver) break; //end game of game is over
     }
     return 0;
 }

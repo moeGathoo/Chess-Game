@@ -1,3 +1,9 @@
+/**
+ * @file headers.h
+ * @brief header file containing initialization of all functions
+ */
+
+//libraries included and used across project
 #include <iostream>
 #include <vector>
 #include <string>
@@ -5,19 +11,21 @@
 #include <string>
 #include <omp.h>
 
-#define PIECES 6
-#define RANK 8
-#define FILE 'a'
+//definitions used across project
+#define PIECES 6    //number of piece types
+#define RANK 8      //number of ranks (and files)
+#define FILE 'a'    //starting file count
 
 using namespace std;
 
+//gobal variables used across project
 extern char pieceTypes[6];
 extern int pieceValues[6];
 extern struct cell board[RANK][RANK];
 extern vector<cell*> black[PIECES];
 extern vector<cell*> white[PIECES];
 
-//state functions
+//*state functions
 //structure for current state of board
 struct state{
     string fen;             //fen string representation of board
@@ -36,7 +44,7 @@ void getPositions();
 void updateState(state* state, cell* piece, bool flag);
 void printState(state* currState);
 
-//board functions
+//*board functions
 //structure to represnt space on board
 struct cell{
     string position;        //name of position eg. a5, b3
@@ -54,7 +62,7 @@ void castle(state* state, cell* king, vector<string> *moves);
 void movePiece(cell* startSpace, cell* goalSpace);
 void printBoard();
 
-//move functions
+//*move functions
 void rookMoves(cell* rook, vector<string> *moves);
 void knightMoves(cell* knight, vector<string> *moves);
 void bishopMoves(cell* bishop, vector<string> *moves);

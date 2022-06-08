@@ -1,4 +1,5 @@
 /**
+ * @file board.cpp
  * @brief All function dealing with the board
  */
 
@@ -74,7 +75,7 @@ void resetBoard(){
 /**
  * @brief Checks if a space is a viable move option for a piece.
  * 
- * @param piece Piece to move.
+ * @param piece Pointer to piece to move.
  * @param row Row of space in array not board.
  * @param col Column of space in array not board.
  * @param moves Pointer to a vector containing all the moves for piece
@@ -102,7 +103,7 @@ void checkSpace(cell *piece, int row, int col, vector<string>* moves) {
 /**
  * @brief Since pawns cannot capture forward, check if space ahead of pawn is empty
  * 
- * @param piece Piece to move.
+ * @param piece Pointer to piece to move.
  * @param row Row of space in array not board.
  * @param col Column of space in array not board.
  * @param moves Pointer to a vector containing all the moves for piece.
@@ -111,7 +112,7 @@ void checkSpace(cell *piece, int row, int col, vector<string>* moves) {
  * vector the pointer 'moves' points to. Adds piece position plus space position
  * e.g. d2d3
  */
-void checkSpaceP(struct cell *piece, int row, int col, vector<string>* moves) {
+void checkSpaceP(cell *piece, int row, int col, vector<string>* moves) {
     if (row >=0 && row < RANK && col >= 0 && col < RANK){
         struct cell space = board[row][col];
         if (piece->colour != space.colour){
@@ -123,14 +124,14 @@ void checkSpaceP(struct cell *piece, int row, int col, vector<string>* moves) {
 /**
  * @brief Checks the viability of all spaces a king can move to.
  * 
- * @param king King to be moved.
+ * @param king Pointer to king to be moved.
  * @param moves Pointer to vector storing all moves available.
  * 
 * @return Nothing. If the space is a viable option, it is added to the
  * vector the pointer 'moves' points to. Adds piece position plus space position
  * e.g. d2d3
  */
-void checkSpacesK(struct cell *king, vector<string>* moves) {
+void checkSpacesK(cell *king, vector<string>* moves) {
     //convert kings position to row and column for array position
     int coords[2] = {0, 0};
     toCoords(king->position, coords);
