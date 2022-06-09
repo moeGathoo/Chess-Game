@@ -1,27 +1,11 @@
 #include "vector.c"
 
+#define FILE 'a'
+
 int main(void) {
-    vector v;
-
-    initVector(&v);
-    vectorPushBack(&v, (void*)1);
-    vectorPushBack(&v, (void*)2);
-    vectorPushBack(&v, (void*)3);
-    vectorPushBack(&v, (void*)4);
-    vectorPushBack(&v, (void*)5);
-
-    for (int i = 0; i < v.size; i++) {
-        printf("%d\n", v.items[i]);
+    char *fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    for (int i = 0; i < strlen(fen); i++) {
+        char c = fen[i];
+        printf("%c\n", c);
     }
-    printf("\n");
-
-    v.items[0] = (void*)10;
-    vectorRemove(&v, 2);
-
-    for (int i = 0; i < v.size; i++) {
-        printf("%d\n", v.items[i]);
-    }
-
-    
-    return 0;
 }
