@@ -6,5 +6,4 @@ D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\C
 D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(11): warning #2464-D: conversion from a string literal to "char *" is deprecated
   
   chess.cu
-     Creating library D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.lib and object D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exp
   Chess CUDA.vcxproj -> D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exe

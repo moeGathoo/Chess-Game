@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Chess-Game'
+make: Leaving directory '/mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Chess-Game'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

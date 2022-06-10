@@ -61,8 +61,8 @@ void initBoard(string fen) {
  * @return Nothing. All pieces are removed from the board.
  */
 void resetBoard(){
-    for (int i = 0; i < 7; i++){
-        for (int j = 0; j < 7; j++){
+    for (int i = 0; i < RANK; i++){
+        for (int j = 0; j < RANK; j++){
             cell *space = &board[i][j]; //point to space on board
             //set space to have no piece and no colour
             space->hasPiece = false;

@@ -36,12 +36,13 @@ int main(int argc, char* argv[]) {
 
     //plays game up to 10 full moves using alpha-beta pruning algorithm
     //prints move made
-    for (int i = 0; i < 10; i++) {
+    // for (int i = 0; i < 10; i++) {
         string move;
         alphaBeta(game, 4, -10001, 10001, &move, true);
-        checkMove(&game, &move);
-        cout << move << endl;
-        if (game.gameOver) break; //end game of game is over
-    }
+        // checkMove(&game, &move);
+        printBoard();
+    //     cout << move << endl;
+    //     if (game.gameOver) break; //end game of game is over
+    // }
     return 0;
 }

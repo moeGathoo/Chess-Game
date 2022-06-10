@@ -35,7 +35,7 @@ typedef struct cell {
 //definitions used across project
 #define PIECES 6    //number of piece types
 #define RANK 8      //number of ranks (and files)
-#define FILE 'a'    //starting file count
+#define FILEA 'a'    //starting file count
 
 //gobal variables used across project
 extern char pieceTypes[6];
@@ -57,7 +57,10 @@ void vectorFree(vector* v);
 //board functions
 void addPieces(char* fen);
 void initBoard(char* fen);
+void resetBoard();
 void printBoard();
 
 //state functions
+state initState(char* fen, char side, char* castle, char* enPassant, int halfMove, int fullMove);
+void toCoords(char* pos, int* coords);
 void getPositions();

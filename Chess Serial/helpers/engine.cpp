@@ -207,7 +207,6 @@ int alphaBeta(state currState, int depth, int alpha, int beta, string *bestMove,
         updateState(&nextState, goalSpace, false); //updates next state indicating move
         int eval = (-1)*alphaBeta(nextState, depth-1, (-1)*beta, (-1)*alpha, bestMove, false); //calculate score of baord after move has been made
         //undo move to restore board's original state
-        movePiece(goalSpace, startSpace);
         resetBoard();
         addPieces(currState.fen);
         //stop searching tree if evaluation is greater than beta threshold
