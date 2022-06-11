@@ -51,11 +51,13 @@ void vectorRemove(vector* v, int index) {
         vectorResize(v, v->capacity / 2);
 }
 
-void vectorClear(vector* v) {
-    for (int i = 0; i < v->size; i++) {
-        v->items[i] = NULL;
+void vectorClear() {
+    for(int i = 0; i < PIECES; i++) {
+        vectorFree(&black[i]);
+        vectorFree(&white[i]);
+        initVector(&black[i]);
+        initVector(&white[i]);
     }
-    vectorResize(v, VECTOR_INIT_CAPACITY);
 }
 
 void vectorFree(vector* v) {

@@ -7,40 +7,22 @@ cell board[RANK][RANK];
 vector black[PIECES];
 vector white[PIECES];
 
-int main(void) {
-    char* fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+int main(int argc, char* argv[]) {
 
     for (int i = 0; i < PIECES; i++) {
         initVector(&black[i]);
         initVector(&white[i]);
     }
 
-    initBoard(fen);
-    
-    FILE* f = fopen("textFiles/fen.txt", "w");
-    char newFen[128];
-    for (int i = 0; i < RANK; i++) {
-        int empty = 0;
-        for (int j = 0; j < RANK; j++) {
-            cell *space = &board[i][j];
-            if (space->piece != '-') {
-                if (empty != 0) fprintf(f, "%d", empty);
-                fprintf(f, "%c", space->piece);
-                empty = 0;
-            }
-            else empty++;
-        }
-        if (empty != 0) fprintf(f, "%d", empty);
-        if (i != RANK - 1) fprintf(f, "%c", '/');
-    }
-    fclose(f);
-
-    f = fopen("textFiles/fen.txt", "r");
-    fgets(newFen, 128, f);
-    fclose(f);
+    state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
+    initBoard(game.fen);
+    printBoard(); printf("\n");
+    vector* moves = black;
 
     for (int i = 0; i < PIECES; i++) {
         vectorFree(&black[i]);
         vectorFree(&white[i]);
     }
+
+    return 0;
 }

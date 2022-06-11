@@ -132,6 +132,7 @@ void updateState(state* state, cell* piece, bool flag) {
         toCoords(piece->position, coords);
         if (coords[1] < 5) state->castle.erase(remove(state->castle.begin(), state->castle.end(), q), state->castle.end());
         else state->castle.erase(remove(state->castle.begin(), state->castle.end(), k), state->castle.end());
+        delete[] coords;
     }
     if (state->castle.length() == 0) state->castle = "-";
     

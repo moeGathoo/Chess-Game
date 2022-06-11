@@ -12,11 +12,11 @@
  *
  * @return state State object with current board information.
  */
-state initState(char* fen, char side, char* castle, char* enPassant, int halfMove, int fullMove) {
+state initState(char* fen, char side, char *castle, char* enPassant, int halfMove, int fullMove) {
     struct state curr;
-    curr.fen = fen;
+    strcpy(curr.fen, fen);
     curr.side = side;
-    curr.castle = castle;
+    strcpy(curr.castle, castle);
     curr.enPassant = enPassant;
     curr.halfMove = halfMove;
     curr.fullMove = fullMove;
@@ -47,10 +47,7 @@ void toCoords(char* pos, int* coords) {
  * type's positions are updated with piece positions
  */
 void getPositions() {
-	for (int i = 0; i < PIECES; i++) {
-		vectorClear(&black[i]);
-		vectorClear(&white[i]);
-	}
+    vectorClear();
 
     for (int i = 0; i < RANK; i++) {
         for (int j = 0; j < RANK; j++) {
@@ -93,39 +90,67 @@ void getPositions() {
  */
 void updateState(state* state, cell* piece, bool flag) {
     //create new fen string representing board by traversing in row-major order
-    char* newFen = "";
-    //for (int i = 0; i < RANK; i++) {
-    //    int empty = 0; //number of consecutive empty spaces
-    //    for (int j = 0; j < RANK; j++) {
-    //        cell space = board[i][j];
-    //        if (space.piece != '-') { //piece found
-    //            if (empty != 0) newFen += to_string(empty); //add empty spaces counted
-    //            newFen += space.piece; //add piece to fen string
-    //            empty = 0; //reset empty space counter
-    //        }
-    //        else empty++; //no piece found, increment empty spaces found
-    //    }
-    //    if (empty != 0) newFen += to_string(empty); //add empty spaces number at end of rank
-    //    if (i != RANK - 1) newFen += "/"; //if not in the last rank, add '/' to indicate end of rank in fen string
-    //}
-    state->fen = newFen; //assign new fen string generated
+    FILE* f = fopen("textFiles/fen.txt", "w");
+    char newFen[STR_BUFFER];
+    for (int i = 0; i < RANK; i++) {
+        int empty = 0;
+        for (int j = 0; j < RANK; j++) {
+            cell* space = &board[i][j];
+            if (space->piece != '-') {
+                if (empty != 0) fprintf(f, "%d", empty);
+                fprintf(f, "%c", space->piece);
+                empty = 0;
+            }
+            else empty++;
+        }
+        if (empty != 0) fprintf(f, "%d", empty);
+        if (i != RANK - 1) fprintf(f, "%c", '/');
+    }
+    fclose(f);
+    f = fopen("textFiles/fen.txt", "r");
+    fgets(newFen, 128, f);
+    fclose(f);
+    strncpy((char*)state->fen, newFen, STR_BUFFER); //assign new fen string generated
 
     //castling piece types
-    //char k = 'k', q = 'q', r = 'r';
-    //if (piece->colour == 'w') { k = toupper(k); q = toupper(q); r = toupper(r); }
+    char k = 'k', q = 'q', r = 'r';
+    if (piece->colour == 'w') { k = toupper(k); q = toupper(q); r = toupper(r); }
+    //printf("%c %c %c\n", k, q, r);
 
-    //if (piece->piece == k) { //if king moves, remove all castling rights for that side
-    //    state->castle.erase(remove(state->castle.begin(), state->castle.end(), q), state->castle.end());
-    //    state->castle.erase(remove(state->castle.begin(), state->castle.end(), k), state->castle.end());
-    //}
-    //else if (piece->piece == r) { //rook moves
-    //    //find which side rook is and remove relevant castling rights flag
-    //    int* coords = new int[2];
-    //    toCoords(piece->position, coords);
-    //    if (coords[1] < 5) state->castle.erase(remove(state->castle.begin(), state->castle.end(), q), state->castle.end());
-    //    else state->castle.erase(remove(state->castle.begin(), state->castle.end(), k), state->castle.end());
-    //}
-    //if (strlen(state->castle) == 0) state->castle = "-";
+    if (piece->piece == k) { //if king moves, remove all castling rights for that side
+        char* posPtr = strchr(state->castle, k);
+        if (posPtr != NULL) {
+            int idxToDel = posPtr - state->castle;
+            memmove(&state->castle[idxToDel], &state->castle[idxToDel+1], strlen(state->castle) - idxToDel);
+        }
+        posPtr = strchr(state->castle, q);
+        if (posPtr != NULL) {
+            int idxToDel = posPtr - state->castle;
+            memmove(&state->castle[idxToDel], &state->castle[idxToDel + 1], strlen(state->castle) - idxToDel);
+        }
+    }
+    else if (piece->piece == r) { //rook moves
+        //find which side rook is and remove relevant castling rights flag
+        int* coords = (int*)calloc(2,sizeof(int));
+        toCoords(piece->position, coords);
+        if (coords[1] > 5) {
+            char* posPtr = strchr(state->castle, k);
+            if (posPtr != NULL) {
+                int idxToDel = posPtr - state->castle;
+                memmove(&state->castle[idxToDel], &state->castle[idxToDel + 1], strlen(state->castle) - idxToDel);
+            }
+        }
+        else {
+            char* posPtr = strchr(state->castle, q);
+            if (posPtr != NULL) {
+                int idxToDel = posPtr - state->castle;
+                memmove(&state->castle[idxToDel], &state->castle[idxToDel + 1], strlen(state->castle) - idxToDel);
+            }
+        }
+        free(coords);
+    }
+    if (strlen(state->castle) == 0) strcpy(state->castle, "-");
+    //printf("castle updated");
 
     if (state->side == 'w') state->side = 'b'; //switch side to play
     else {
