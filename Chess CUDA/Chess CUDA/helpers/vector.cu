@@ -2,6 +2,10 @@
 
 #define VECTOR_INIT_CAPACITY 4
 
+static int myCompare(const void* a, const void* b) {
+    return strcmp(*(const char**)a, *(const char**)b);
+}
+
 void initVector(vector* v) {
     v->capacity = VECTOR_INIT_CAPACITY;
     v->size = 0;
@@ -35,6 +39,18 @@ void* vectorGet(vector* v, int index) {
     if (index >= 0 && index < v->size)
         return v->items[index];
     return NULL;
+}
+
+void vectorSort(vector* v) {
+    qsort(v->items, v->size, sizeof(const char*), myCompare);
+}
+
+bool vectorSearch(vector* v, char* str) {
+    int len = (sizeof(void*)*v->size) / sizeof(v->items[0]);
+    for (int i = 0; i < len; i++)
+        if (!strcmp((const char*)v->items[i], str))
+            return true;
+    return false;
 }
 
 void vectorRemove(vector* v, int index) {

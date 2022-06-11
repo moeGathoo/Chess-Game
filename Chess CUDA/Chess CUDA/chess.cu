@@ -17,7 +17,17 @@ int main(int argc, char* argv[]) {
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
     initBoard(game.fen);
     printBoard(); printf("\n");
-    vector* moves = black;
+
+    //char* posPtr = strchr(pieceTypes, 'q');
+    //int idx = posPtr - pieceTypes;
+    //printf("%d\n", idx);
+    vector moves; initVector(&moves);
+    kingMoves(&game, &board[7][4], &moves);
+    if (moves.size != 0)
+        for (int i = 0; i < moves.size; i++) {
+            char* move = (char*)vectorGet(&moves, i);
+            printf("%s\n", move);
+        }
 
     for (int i = 0; i < PIECES; i++) {
         vectorFree(&black[i]);

@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 10 15:02:29 2022
+# Make data base, printed on Sat Jun 11 14:11:35 2022
 
 # Variables
 
@@ -59,7 +59,7 @@ HELPER1 = helpers/state.cpp
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-afed37dd-dc4b-4e3c-8579-edea115be00d.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-3e19f19c-90ed-4580-95d9-82dd8f9cac20.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -85,7 +85,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = moegathoo
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -240,6 +240,6 @@ chess: chess.cpp
 # strcache performance: lookups = 26 / hit rate = 34%
 # hash-table stats:
 # Load=17/8192=0%, Rehash=0, Collisions=1/26=4%
-# Finished Make data base on Fri Jun 10 15:02:29 2022
+# Finished Make data base on Sat Jun 11 14:11:35 2022
 
  

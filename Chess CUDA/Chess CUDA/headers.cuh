@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <ctype.h>
 
 //definitions used across project
@@ -51,6 +52,8 @@ int vectorSize(vector* v);
 void vectorPushBack(vector* v, void* item);
 void vectorSet(vector* v, int index, void* item);
 void* vectorGet(vector* v, int index);
+void vectorSort(vector* v);
+bool vectorSearch(vector* v, char* str);
 void vectorRemove(vector* v, int index);
 void vectorClear();
 void vectorFree(vector* v);
