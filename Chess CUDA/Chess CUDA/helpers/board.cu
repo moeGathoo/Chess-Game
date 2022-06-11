@@ -211,7 +211,6 @@ void movePiece(cell* startSpace, cell* goalSpace) {
     getPositions();
 }
 
-
 /**
  * @brief Prints the pieces of the board in relevant positions.
  *
