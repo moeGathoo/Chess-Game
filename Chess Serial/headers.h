@@ -39,7 +39,6 @@ struct state{
 };
 state initState(string fen, char side, string castle, string enPassant, int halfMove, int fullMove);
 void toCoords(string pos, int* coords);
-void toPos(int col, int row, vector<string>* vec);
 void getPositions();
 void updateState(state* state, cell* piece, bool flag);
 void printState(state* currState);
