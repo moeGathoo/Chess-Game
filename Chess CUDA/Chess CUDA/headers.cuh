@@ -7,10 +7,10 @@
 #include <ctype.h>
 
 //definitions used across project
-#define PIECES 6    //number of piece types
-#define RANK 8      //number of ranks (and files)
-#define FILEA 'a'    //starting file count
-#define STR_BUFFER 128
+#define PIECES 6        //number of piece types
+#define RANK 8          //number of ranks (and files)
+#define FILEA 'a'       //starting file count
+#define STR_BUFFER 128  //buffer for fen string
 
 //vector structure
 typedef struct vector {
@@ -85,3 +85,9 @@ void kingMoves(state* state, cell* king, vector* moves);
 void pawnMoves(cell* pawn, vector* moves);
 void pieceMoves(state* state, cell* piece, int index, vector* moves);
 bool checkMove(state* state, char* move);
+
+//engine functions
+void assign(char* bestMove);
+int evaluation(state* state);
+int advEvaluation(state* state);
+int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, bool first);

@@ -204,7 +204,7 @@ void pawnMoves(cell* pawn, vector* moves) {
                 strcpy(move, pawn->position); strcat(move, board[coords[0] - 1][coords[1]].position);
                 vectorPushBack(moves, move);
             }
-        if (coords[0] == 1 && !board[coords[0] - 1][coords[1]].hasPiece) //check for possible 2 space move if pawn is in starting rank
+        if (coords[0] == 6 && !board[coords[0] - 1][coords[1]].hasPiece) //check for possible 2 space move if pawn is in starting rank
             if (!board[coords[0] - 2][coords[1]].hasPiece) {
                 char* move = (char*)malloc(sizeof(pawn->position) + sizeof(board[coords[0] - 2][coords[1]].position));
                 strcpy(move, pawn->position); strcat(move, board[coords[0] - 2][coords[1]].position);

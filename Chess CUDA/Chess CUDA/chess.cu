@@ -7,6 +7,20 @@ cell board[RANK][RANK];
 vector black[PIECES];
 vector white[PIECES];
 
+/**
+ * @brief Main function to play game.
+ *
+ * @param argc Number of arguments.
+ * @param argv Each argument pertains to a particular part of fen notation.
+ * ? argv[0]: fen string representation of board
+ * ? argv[1]: side to play
+ * ? argv[2]: castling rights
+ * ? argv[3]: en passant move
+ * ? argv[4]: half moves (total moves since pawn move or piece capture)
+ * ? argv[5]: full moves (increments by 1 after black moves)
+ *
+ * @return int
+ */
 int main(int argc, char* argv[]) {
 
     for (int i = 0; i < PIECES; i++) {
@@ -16,18 +30,18 @@ int main(int argc, char* argv[]) {
 
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
     initBoard(game.fen);
-    printBoard(); printf("\n");
+    
+    //for (int i = 0; i < 10; i++) {
+    //    char* move = "";
+    //    alphaBeta(game, 4, -10001, 10001, move, true);
+    //    checkMove(&game, move);
+    //    printf("%s\n", move);
+    //    if (game.gameOver) break; //end game of game is over
+    //}
 
-    //char* posPtr = strchr(pieceTypes, 'q');
-    //int idx = posPtr - pieceTypes;
-    //printf("%d\n", idx);
-    vector moves; initVector(&moves);
-    kingMoves(&game, &board[7][4], &moves);
-    if (moves.size != 0)
-        for (int i = 0; i < moves.size; i++) {
-            char* move = (char*)vectorGet(&moves, i);
-            printf("%s\n", move);
-        }
+    char* bestMove = "";
+    assign(bestMove);
+    printf("%s\n", bestMove);
 
     for (int i = 0; i < PIECES; i++) {
         vectorFree(&black[i]);

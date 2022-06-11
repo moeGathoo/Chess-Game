@@ -117,10 +117,11 @@ int advEvaluation(state *state) {
     int mobility = whiteMoves.size() - blackMoves.size();
 
     //attack score: number of opposition pieces a player is threatening to attack
+    int* goalCoords = new int[2];
     int blackScore = 0;
     for (string blackMove : blackMoves) {
         string goal = blackMove.substr(2,3);
-        int* goalCoords = new int[2]; toCoords(goal, goalCoords);
+        toCoords(goal, goalCoords);
         if (board[goalCoords[0]][goalCoords[1]].hasPiece) {
             blackScore++;
             //bonus points if piece being threatened is oppositions king
@@ -131,13 +132,14 @@ int advEvaluation(state *state) {
     int whiteScore = 0;
     for (string whiteMove : whiteMoves) {
         string goal = whiteMove.substr(2,3);
-        int* goalCoords = new int[2]; toCoords(goal, goalCoords);
+        toCoords(goal, goalCoords);
         if (board[goalCoords[0]][goalCoords[1]].hasPiece) {
             whiteScore++;
             if (board[goalCoords[0]][goalCoords[1]].piece == 'k')
                 whiteScore += 10;
         }
     }
+    delete[] goalCoords;
     int attack = whiteScore - blackScore;
 
     //overall score

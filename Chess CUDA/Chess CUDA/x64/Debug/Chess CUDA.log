@@ -1,5 +1,9 @@
 ﻿  Compiling CUDA source file chess.cu...
   
   D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\chess.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu" 
+D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(42): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(42): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
   chess.cu
   Chess CUDA.vcxproj -> D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exe

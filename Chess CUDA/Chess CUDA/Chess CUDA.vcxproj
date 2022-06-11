@@ -79,6 +79,7 @@
   <ItemGroup>
     <CudaCompile Include="chess.cu" />
     <CudaCompile Include="helpers\board.cu" />
+    <CudaCompile Include="helpers\engine.cu" />
     <CudaCompile Include="helpers\moves.cu" />
     <CudaCompile Include="helpers\state.cu" />
     <CudaCompile Include="helpers\vector.cu" />

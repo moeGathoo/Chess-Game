@@ -90,32 +90,27 @@ void getPositions() {
  */
 void updateState(state* state, cell* piece, bool flag) {
     //create new fen string representing board by traversing in row-major order
-    FILE* f = fopen("textFiles/fen.txt", "w");
-    char newFen[STR_BUFFER];
+    char newFen[STR_BUFFER] = ""; char count;
     for (int i = 0; i < RANK; i++) {
         int empty = 0;
         for (int j = 0; j < RANK; j++) {
             cell* space = &board[i][j];
             if (space->piece != '-') {
-                if (empty != 0) fprintf(f, "%d", empty);
-                fprintf(f, "%c", space->piece);
+                if (empty != 0) { count = empty + '0'; strncat(newFen, &count, 1); }
+                strncat(newFen, &space->piece, 1);
                 empty = 0;
             }
             else empty++;
         }
-        if (empty != 0) fprintf(f, "%d", empty);
-        if (i != RANK - 1) fprintf(f, "%c", '/');
+        if (empty != 0) { count = empty + '0'; strncat(newFen, &count, 1); }
+        char slash = '/';
+        if (i != RANK - 1) strncat(newFen, &slash, 1);
     }
-    fclose(f);
-    f = fopen("textFiles/fen.txt", "r");
-    fgets(newFen, 128, f);
-    fclose(f);
-    strncpy((char*)state->fen, newFen, STR_BUFFER); //assign new fen string generated
+    strncpy(state->fen, newFen, STR_BUFFER);
 
     //castling piece types
     char k = 'k', q = 'q', r = 'r';
     if (piece->colour == 'w') { k = toupper(k); q = toupper(q); r = toupper(r); }
-    //printf("%c %c %c\n", k, q, r);
 
     if (piece->piece == k) { //if king moves, remove all castling rights for that side
         char* posPtr = strchr(state->castle, k);
