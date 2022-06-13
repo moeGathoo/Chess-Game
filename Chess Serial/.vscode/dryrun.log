@@ -1,4 +1,4 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Chess-Game/Chess Serial'
 g++ -o chess chess.cpp helpers/state.cpp helpers/board.cpp helpers/moves.cpp helpers/engine.cpp
 make: Leaving directory '/mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Chess-Game/Chess Serial'

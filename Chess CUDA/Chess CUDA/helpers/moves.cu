@@ -127,11 +127,14 @@ void queenMoves(cell* queen, vector* moves) {
  */
 void kingMoves(state* state, cell* king, vector* moves) {
     //check all spaces for king moveset (all spaces in 3x3 neighbourhood)
-    checkSpacesK(king, moves);
+    vector kingMoves; initVector(&kingMoves);
+    checkSpacesK(king, &kingMoves);
+    //check for possible castling moves
+    castle(state, king, &kingMoves);
+
     vector* enemy; vector enemyMoves; initVector(&enemyMoves);
     if (king->colour == 'b') enemy = white;
     else enemy = black;
-
     //since a king cannot move itself into check, make sure none of the spaces a king can move to will do that
     //generate list of all spaces enemy side can move to
     for (int i = 0; i < PIECES; i++) {
@@ -146,22 +149,25 @@ void kingMoves(state* state, cell* king, vector* moves) {
     vectorSort(&enemyMoves);
 
     //remove all the moves a king can move to that an enemy piece can move to as well
-    for (int i = 0; i < moves->size; i++) {
-        char* move = (char*)vectorGet(moves, i);
+    for (int i = 0; i < kingMoves.size; i++) {
+        char* move = (char*)vectorGet(&kingMoves, i);
         char goal[3] = ""; strncpy(goal, &move[2], 2); //extract space to move to
         for (int j = 0; j < enemyMoves.size; j++) { //search for space amongst enemy moves
             char* enemyMove = (char*)vectorGet(&enemyMoves, j);
             char enemy[3] = ""; strncpy(enemy, &enemyMove[2], 2);
             if (!strcmp(goal, enemy)) { //if space is found
-                vectorRemove(moves, i); //remove it from 'moves' vector
+                vectorRemove(&kingMoves, i); //remove it from 'moves' vector
                 i--;
                 break; //break out of enemy search since space has been found, no need to search further
             }
         }
     }
 
-    //check for possible castling moves
-    castle(state, king, moves);
+    //add remaining legal moves
+    if (kingMoves.size != 0) {
+        for (int i = 0; i < kingMoves.size; i++)
+            vectorPushBack(moves, (char*)vectorGet(&kingMoves, i));
+    }
 
     //sort moves alphabetically
     vectorSort(moves);
@@ -280,7 +286,7 @@ bool checkMove(state* state, char* move) {
     if (startSpace->piece == 'p' || startSpace->piece == 'P' || goalSpace->hasPiece) flag = true;
 
     int idx = 0;
-    vector moves;
+    vector moves; initVector(&moves);
     if (startSpace->colour == 'b') { //piece is black
         char* posPtr = strchr(pieceTypes, startSpace->piece);
         if (posPtr != NULL) idx = posPtr - pieceTypes;
@@ -296,6 +302,7 @@ bool checkMove(state* state, char* move) {
 
     //search for move in generated moves list
     if (vectorSearch(&moves, move)) { //move was found
+        vectorFree(&moves);
         movePiece(startSpace, goalSpace); //move piece
         if (idx == 4) { //if king was moved
             //check if castkling moved was made on queen side
@@ -317,6 +324,6 @@ bool checkMove(state* state, char* move) {
         return true;
     }
     //move was not found (illegal move), return false
-    free(startCoords); free(goalCoords);
+    free(startCoords); free(goalCoords); vectorFree(&moves);
     return false;
 }

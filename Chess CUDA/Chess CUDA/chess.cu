@@ -31,17 +31,13 @@ int main(int argc, char* argv[]) {
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
     initBoard(game.fen);
     
-    //for (int i = 0; i < 10; i++) {
-    //    char* move = "";
-    //    alphaBeta(game, 4, -10001, 10001, move, true);
-    //    checkMove(&game, move);
-    //    printf("%s\n", move);
-    //    if (game.gameOver) break; //end game of game is over
-    //}
-
-    char* bestMove = "";
-    assign(bestMove);
-    printf("%s\n", bestMove);
+    for (int i = 0; i < 10; i++) {
+        char move[5] = "";
+        alphaBeta(game, 4, -10001, 10001, &move[0], true);
+        printf("%s\n", move);
+        checkMove(&game, move);
+        if (game.gameOver) break; //end game of game is over
+    }
 
     for (int i = 0; i < PIECES; i++) {
         vectorFree(&black[i]);

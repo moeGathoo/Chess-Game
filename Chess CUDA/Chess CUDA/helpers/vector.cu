@@ -17,7 +17,7 @@ int vectorSize(vector* v) {
 }
 
 static void vectorResize(vector* v, int capacity) {
-    void** items = (void**)realloc(v->items, sizeof(void*) * capacity);
+    void** items = (void**)realloc(v->items, sizeof(void**) * capacity);
     if (items) {
         v->items = items;
         v->capacity = capacity;

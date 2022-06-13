@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun 11 23:58:57 2022
+# Make data base, printed on Sun Jun 12 23:54:08 2022
 
 # Variables
 
@@ -15,7 +17,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = ELECTRON_RUN_AS_NODE/w:
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
 # environment
@@ -35,7 +37,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /mnt/c/Users/migat/AppData/Local/Programs/Microsoft VS Code/bin/code
+_ = /home/moegathoo/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -57,7 +59,7 @@ HELPER1 = helpers/state.cpp
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-63f79c26-0a41-4c62-96a7-770ea7e1f8b7.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-b728a518-c5b9-4fc7-a3d5-7b974ee4e7bd.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -71,7 +73,7 @@ PWD = /mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Ch
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/759_interop
+WSL_INTEROP = /run/WSL/12_interop
 # makefile (from 'Makefile', line 4)
 HELPER2 = helpers/board.cpp
 # environment
@@ -83,7 +85,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = moegathoo
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -95,7 +97,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 1
+SHLVL = 0
 # makefile (from 'Makefile', line 1)
 CC = g++
 # default
@@ -105,7 +107,7 @@ USER = moegathoo
 # makefile
 .DEFAULT_GOAL := chess
 # environment
-NAME = Code
+NAME = DESKTOP-8EIJ12F
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -156,8 +158,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=73/1024=7%, Rehash=0, Collisions=5/100=5%
+# Load=74/1024=7%, Rehash=0, Collisions=5/101=5%
 
 # Pattern-specific Variable Values
 
@@ -185,7 +189,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-06 22:58:01.0140548
+#  Last modified 2022-06-12 23:54:07.0315434
 #  File has been updated.
 #  Successfully updated.
 
@@ -206,7 +210,7 @@ run:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 15):
-	./chess rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+	./chess rnbqkbnr/pppppppp/8/8/R3P3/2NB3N/PPP2PPP/2BQK2R w Kkq - 0 1
 
 clean:
 #  Implicit rule search has not been done.
@@ -236,8 +240,6 @@ chess: chess.cpp
 # strcache performance: lookups = 26 / hit rate = 34%
 # hash-table stats:
 # Load=17/8192=0%, Rehash=0, Collisions=1/26=4%
-# Finished Make data base on Sat Jun 11 23:58:57 2022
+# Finished Make data base on Sun Jun 12 23:54:08 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-

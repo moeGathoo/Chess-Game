@@ -12,4 +12,4 @@ clean:
 	rm chess
 
 run:
-	./chess rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+	./chess rnbqkbnr/pppppppp/8/8/R3P3/2NB3N/PPP2PPP/2BQK2R w Kkq - 0 1

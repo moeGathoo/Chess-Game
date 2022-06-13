@@ -131,11 +131,13 @@ void queenMoves(cell* queen, vector<string> *moves) {
  */
 void kingMoves(state* state, cell* king, vector<string> *moves) {
     //check all spaces for king moveset (all spaces in 3x3 neighbourhood)
-    checkSpacesK(king, moves);
+    vector<string> kingMoves; checkSpacesK(king, &kingMoves);
+    //check for possible castling moves
+    castle(state, king, moves);
+
     vector<cell*>* enemy; vector<string> enemyMoves;
     if (king->colour == 'b') enemy = white;
     else enemy = black;
-
     //since a king cannot move itself into check, make sure none of the spaces a king can move to will do that
     //generate list of all spaces enemy side can move to
     for (int i = 0; i < PIECES; i++) {
@@ -146,21 +148,22 @@ void kingMoves(state* state, cell* king, vector<string> *moves) {
         }
     }
     //remove all the moves a king can move to that an enemy piece can move to as well
-    for (int i = 0; i < moves->size(); i++) {
-        string move = moves->at(i);
+    for (int i = 0; i < kingMoves.size(); i++) {
+        string move = kingMoves[i];
         string goal = move.substr(2,4); //extract space to move to
         for (string enemyMove : enemyMoves) { //search for space amongst enemy moves
             string enemy = enemyMove.substr(2,4);
             if (goal == enemy) { //if space is found
-                moves->erase(moves->begin() + i); //remove it from 'moves' vector
+                kingMoves.erase(kingMoves.begin() + i); //remove it from 'moves' vector
                 i--;
                 break; //break out of enemy search since space has been found, no need to search further
             }
         }
     }
 
-    //check for possible castling moves
-    castle(state, king, moves);
+    //add remaining legal moves
+    moves->insert(moves->end(), kingMoves.begin(), kingMoves.end());
+
     //sort list of moves
     sort(moves->begin(), moves->end());
 }

@@ -142,7 +142,7 @@ int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, b
 
     //execute each move generated
     for (int i = 0; i < moves.size; i++) {
-        char* move = (char*)vectorGet(&moves, i);
+        char move[5] = ""; strcpy(move, (char*)vectorGet(&moves, i));
         //get moves start and goal spaces to move pieces based on positions in 'move' string
         char start[3] = ""; strncpy(start, &move[0], 2);
         int* startCoords = (int*)calloc(2, sizeof(int)); toCoords(start, startCoords);
@@ -161,14 +161,16 @@ int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, b
         addPieces(currState.fen);
         //stop searching tree if evaluation is greater than beta threshold
         if (eval >= beta) {
+            vectorFree(&moves);
             return beta;
         }
         //assign current best move if at root node
         if (eval > alpha) {
             alpha = eval;
-            if (first) bestMove = move;
+            if (first) strncpy(bestMove, move, 5);
         }
     }
+    vectorFree(&moves);
 
     return alpha;
 }

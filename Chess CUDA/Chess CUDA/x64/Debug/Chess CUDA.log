@@ -1,9 +1,90 @@
-﻿  Compiling CUDA source file chess.cu...
-  
-  D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\chess.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu" 
-D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(42): warning #2464-D: conversion from a string literal to "char *" is deprecated
-  
-D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(42): warning #2464-D: conversion from a string literal to "char *" is deprecated
-  
-  chess.cu
-  Chess CUDA.vcxproj -> D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exe
+﻿Build started 2022/06/13 02:05:17.
+Logging verbosity is set to: Normal.     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "x64\Debug\Chess CUDA.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       AddCudaCompileDeps:
+       Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompileDeps:
+       Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompileDeps:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /D__CUDACC_VER_MAJOR__=11 /D__CUDACC_VER_MINOR__=6 /DWIN32 /DWIN64 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" /I. /FIcuda_runtime.h /c "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu" 
+       AddCudaCompileDeps:
+       Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompileDeps:
+       Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompileDeps:
+       Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompilePropsDeps:
+       Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompilePropsDeps:
+       Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompilePropsDeps:
+       Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompilePropsDeps:
+       Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompilePropsDeps:
+       Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
+       AddCudaCompilePropsDeps:
+       Skipping target "AddCudaCompilePropsDeps" because all output files are up-to-date with respect to the input files.
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:2) on node 2 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+       Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:3) on node 1 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+       Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:4) on node 3 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+         Compiling CUDA source file helpers\engine.cu...
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:6) on node 4 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+       Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:5) on node 5 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+       Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:7) on node 6 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+       Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+         cmd.exe /C "C:\Users\migat\AppData\Local\Temp\tmp1232f19985374a1bb8a5c48f1aeb1cb1.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\engine.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu"
+         
+         D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\engine.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu" 
+     1>D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu(179): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         
+     1>D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu(178): warning #550-D: parameter "bestMove" was set but never used
+         
+     1>D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu(179): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         
+         engine.cu
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>Link:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exe" /INCREMENTAL /ILK:"x64\Debug\Chess CUDA.ilk" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudart.lib cudadevrt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.lib" /MACHINE:X64 "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\chess.cu.obj"
+         "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\board.cu.obj"
+         "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\engine.cu.obj"
+         "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\moves.cu.obj"
+         "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\state.cu.obj"
+         "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\vector.cu.obj"
+         Chess CUDA.vcxproj -> D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exe
+       FinalizeBuildStatus:
+         Deleting file "x64\Debug\Chess CUDA.tlog\unsuccessfulbuild".
+         Touching "x64\Debug\Chess CUDA.tlog\Chess CUDA.lastbuildstate".
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+       "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (Build target) (1) ->
+       "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target) (1:4) ->
+       (CudaBuildCore target) -> 
+         D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu(179): warning #2464-D: conversion from a string literal to "char *" is deprecated
+         D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu(178): warning #550-D: parameter "bestMove" was set but never used
+         D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\engine.cu(179): warning #2464-D: conversion from a string literal to "char *" is deprecated
+
+    3 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.80
