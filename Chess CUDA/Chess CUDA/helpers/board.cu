@@ -132,9 +132,13 @@ void checkSpaceP(cell* piece, int row, int col, vector* moves) {
  * vector the pointer 'moves' points to. Adds piece position plus space position
  * e.g. d2d3
  */
-void checkSpacesK(cell* king, vector* moves) {
+void checkSpacesK(state* game, cell* king, vector* moves) {
     //convert kings position to row and column for array position
     int coords[2] = { 0, 0 };
+    if (king == NULL) {
+        game->gameOver = true;
+        return;
+    }
     toCoords(king->position, coords);
 
     //checks all spaces in 3x3 neighbourhood of king

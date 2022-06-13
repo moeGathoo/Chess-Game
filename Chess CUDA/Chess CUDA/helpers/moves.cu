@@ -128,7 +128,7 @@ void queenMoves(cell* queen, vector* moves) {
 void kingMoves(state* state, cell* king, vector* moves) {
     //check all spaces for king moveset (all spaces in 3x3 neighbourhood)
     vector kingMoves; initVector(&kingMoves);
-    checkSpacesK(king, &kingMoves);
+    checkSpacesK(state, king, &kingMoves);
     //check for possible castling moves
     castle(state, king, &kingMoves);
 
@@ -138,7 +138,7 @@ void kingMoves(state* state, cell* king, vector* moves) {
     //since a king cannot move itself into check, make sure none of the spaces a king can move to will do that
     //generate list of all spaces enemy side can move to
     for (int i = 0; i < PIECES; i++) {
-        if (i == 4) checkSpacesK((cell*)vectorGet(&enemy[4],0), &enemyMoves);
+        if (i == 4) checkSpacesK(state, (cell*)vectorGet(&enemy[4],0), &enemyMoves);
         else if (enemy[i].size != 0) {
             for (int j = 0; j < enemy[i].size; j++) {
                 cell* piece = (cell*)vectorGet(&enemy[i], j);

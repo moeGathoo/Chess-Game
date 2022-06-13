@@ -36,24 +36,24 @@ int main(int argc, char* argv[]) {
 
     //plays game up to 10 full moves using alpha-beta pruning algorithm
     //prints move made
-    // for (int i = 0; i < 10; i++) {
-    //     string move;
-    //     alphaBeta(game, 4, -10001, 10001, &move, true);
-    //     checkMove(&game, &move);
-    //     cout << move << endl;
-    //     if (game.gameOver) break; //end game of game is over
-    // }
-
-    vector<cell*>* pieces; vector<string> moves;
-    if (game.side == 'b') pieces = black;
-    else pieces = white;
-    for (int i = 0; i < PIECES; i++)
-        if (pieces[i].size() != 0)
-            for (cell* piece : pieces[i])
-                pieceMoves(&game, piece, i, &moves);
-
-    for (auto move : moves)
+    for (int i = 0; i < 10; i++) {
+        string move;
+        alphaBeta(game, 4, -10001, 10001, &move, true);
+        checkMove(&game, &move);
         cout << move << endl;
+        if (game.gameOver) break; //end game of game is over
+    }
+
+    // vector<cell*>* pieces; vector<string> moves;
+    // if (game.side == 'b') pieces = black;
+    // else pieces = white;
+    // for (int i = 0; i < PIECES; i++)
+    //     if (pieces[i].size() != 0)
+    //         for (cell* piece : pieces[i])
+    //             pieceMoves(&game, piece, i, &moves);
+
+    // for (auto move : moves)
+    //     cout << move << endl;
 
     return 0;
 }

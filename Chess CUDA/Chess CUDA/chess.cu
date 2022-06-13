@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
     initBoard(game.fen);
     
-    for (int i = 0; i < 10; i++) {
+    while (!game.gameOver) {
         char move[5] = "";
         alphaBeta(game, 4, -10001, 10001, &move[0], true);
         printf("%s\n", move);

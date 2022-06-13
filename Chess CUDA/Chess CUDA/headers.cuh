@@ -64,7 +64,7 @@ void initBoard(char* fen);
 void resetBoard();
 void checkSpace(cell* piece, int row, int col, vector* moves);
 void checkSpaceP(cell* piece, int row, int col, vector* moves);
-void checkSpacesK(cell* king, vector* moves);
+void checkSpacesK(state* game, cell* king, vector* moves);
 void castle(state* state, cell* king, vector* moves);
 void movePiece(cell* startSpace, cell* goalSpace);
 void printBoard();

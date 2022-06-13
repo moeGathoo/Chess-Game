@@ -133,12 +133,14 @@ int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, b
     vector* pieces; vector moves; initVector(&moves);
     if (currState.side == 'b') pieces = black;
     else pieces = white;
-    for (int i = 0; i < PIECES; i++)
+    for (int i = 0; i < PIECES; i++) {
+        if (i == 4 && pieces[i].size == 0) return 10001;
         if (pieces[i].size != 0)
             for (int j = 0; j < pieces[i].size; j++) {
                 cell* piece = (cell*)vectorGet(&pieces[i], j);
                 pieceMoves(&currState, piece, i, &moves);
             }
+    }
 
     //execute each move generated
     for (int i = 0; i < moves.size; i++) {
