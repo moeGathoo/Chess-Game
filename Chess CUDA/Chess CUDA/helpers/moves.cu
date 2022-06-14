@@ -8,7 +8,7 @@
  *
  * @return Nothing. All moves deemed playable for rook is sent to 'moves' vector
  */
-void rookMoves(cell* rook, vector* moves) {
+void rookMoves(cell board[][RANK], cell* rook, vector* moves) {
     //determine row and column of rook appearing in 2D array
     int coords[2] = { 0, 0 };
     toCoords(rook->position, coords);
@@ -18,19 +18,19 @@ void rookMoves(cell* rook, vector* moves) {
     //determine number of spaces to slide to vertically down
     int i = 1;
     while (coords[0] + i < RANK && !board[coords[0] + i][coords[1]].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(rook, coords[0] + j, coords[1], moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, rook, coords[0] + j, coords[1], moves);
     //determine number of spaces to slide to vertically up
     i = 1;
     while (coords[0] - i >= 0 && !board[coords[0] - i][coords[1]].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(rook, coords[0] - j, coords[1], moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, rook, coords[0] - j, coords[1], moves);
     //determine number of spaces to slide to horizontally right
     i = 1;
     while (coords[1] + i < RANK && !board[coords[0]][coords[1] + i].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(rook, coords[0], coords[1] + j, moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, rook, coords[0], coords[1] + j, moves);
     //determine number of spaces to slide to horizontally left
     i = 1;
     while (coords[1] - i >= 0 && !board[coords[0]][coords[1] - i].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(rook, coords[0], coords[1] - j, moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, rook, coords[0], coords[1] - j, moves);
 
     //sort moves alphabetically
     vectorSort(moves);
@@ -44,7 +44,7 @@ void rookMoves(cell* rook, vector* moves) {
  *
  * @return Nothing. All moves deemed playable for knight is sent to 'moves' vector
  */
-void knightMoves(cell* knight, vector* moves) {
+void knightMoves(cell board[][RANK], cell* knight, vector* moves) {
     //determine row and column of rook appearing in 2D array
     int coords[2] = { 0, 0 };
     toCoords(knight->position, coords);
@@ -52,14 +52,14 @@ void knightMoves(cell* knight, vector* moves) {
     //since knights aren't sliding pieces and can hop over other pieces,
     //individual spaces can be checked
     //check all spaces a knight can move to
-    checkSpace(knight, coords[0] - 1, coords[1] - 2, moves);
-    checkSpace(knight, coords[0] - 2, coords[1] - 1, moves);
-    checkSpace(knight, coords[0] - 2, coords[1] + 1, moves);
-    checkSpace(knight, coords[0] - 1, coords[1] + 2, moves);
-    checkSpace(knight, coords[0] + 1, coords[1] + 2, moves);
-    checkSpace(knight, coords[0] + 2, coords[1] + 1, moves);
-    checkSpace(knight, coords[0] + 1, coords[1] - 2, moves);
-    checkSpace(knight, coords[0] + 2, coords[1] - 1, moves);
+    checkSpace(board, knight, coords[0] - 1, coords[1] - 2, moves);
+    checkSpace(board, knight, coords[0] - 2, coords[1] - 1, moves);
+    checkSpace(board, knight, coords[0] - 2, coords[1] + 1, moves);
+    checkSpace(board, knight, coords[0] - 1, coords[1] + 2, moves);
+    checkSpace(board, knight, coords[0] + 1, coords[1] + 2, moves);
+    checkSpace(board, knight, coords[0] + 2, coords[1] + 1, moves);
+    checkSpace(board, knight, coords[0] + 1, coords[1] - 2, moves);
+    checkSpace(board, knight, coords[0] + 2, coords[1] - 1, moves);
 
     //sort moves alphabetically
     vectorSort(moves);
@@ -73,7 +73,7 @@ void knightMoves(cell* knight, vector* moves) {
  *
  * @return Nothing. All moves deemed playable for bishop is sent to 'moves' vector
  */
-void bishopMoves(cell* bishop, vector* moves) {
+void bishopMoves(cell board[][RANK], cell* bishop, vector* moves) {
     //determine row and column of rook appearing in 2D array
     int coords[2] = { 0, 0 };
     toCoords(bishop->position, coords);
@@ -83,19 +83,19 @@ void bishopMoves(cell* bishop, vector* moves) {
     //determine number of spaces to slide to down and right
     int i = 1;
     while (coords[0] + i < RANK && coords[1] + i < RANK && !board[coords[0] + i][coords[1] + i].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(bishop, coords[0] + j, coords[1] + j, moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, bishop, coords[0] + j, coords[1] + j, moves);
     //determine number of spaces to slide to down and left
     i = 1;
     while (coords[0] + i<RANK && coords[1] - i>-1 && !board[coords[0] + i][coords[1] - i].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(bishop, coords[0] + j, coords[1] - j, moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, bishop, coords[0] + j, coords[1] - j, moves);
     //determine number of spaces to slide to up and right
     i = 1;
     while (coords[0] - i > -1 && coords[1] + i < RANK && !board[coords[0] - i][coords[1] + i].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(bishop, coords[0] - j, coords[1] + j, moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, bishop, coords[0] - j, coords[1] + j, moves);
     //determine number of spaces to slide to up and left
     i = 1;
     while (coords[0] - i > -1 && coords[1] - i > -1 && !board[coords[0] - i][coords[1] - i].hasPiece) i++;
-    for (int j = 1; j <= i; j++) checkSpace(bishop, coords[0] - j, coords[1] - j, moves);
+    for (int j = 1; j <= i; j++) checkSpace(board, bishop, coords[0] - j, coords[1] - j, moves);
 
     //sort moves alphabetically
     vectorSort(moves);
@@ -109,10 +109,10 @@ void bishopMoves(cell* bishop, vector* moves) {
  *
  * @return Nothing. All moves deemed playable for queen is sent to 'moves' vector
  */
-void queenMoves(cell* queen, vector* moves) {
+void queenMoves(cell board[][RANK], cell* queen, vector* moves) {
     //since queen moveset is combined bishop and rook moveset and a sliding piece, call those functions
-    bishopMoves(queen, moves);
-    rookMoves(queen, moves);
+    bishopMoves(board, queen, moves);
+    rookMoves(board, queen, moves);
     //sort moves alphabetically
     vectorSort(moves);
 }
@@ -125,12 +125,12 @@ void queenMoves(cell* queen, vector* moves) {
  *
  * @return Nothing. All moves deemed playable for king is sent to 'moves' vector
  */
-void kingMoves(state* state, cell* king, vector* moves) {
+void kingMoves(cell board[][RANK], state* state, cell* king, vector* moves) {
     //check all spaces for king moveset (all spaces in 3x3 neighbourhood)
     vector kingMoves; initVector(&kingMoves);
-    checkSpacesK(state, king, &kingMoves);
+    checkSpacesK(board, state, king, &kingMoves);
     //check for possible castling moves
-    castle(state, king, &kingMoves);
+    castle(board, state, king, &kingMoves);
 
     vector* enemy; vector enemyMoves; initVector(&enemyMoves);
     if (king->colour == 'b') enemy = white;
@@ -138,11 +138,11 @@ void kingMoves(state* state, cell* king, vector* moves) {
     //since a king cannot move itself into check, make sure none of the spaces a king can move to will do that
     //generate list of all spaces enemy side can move to
     for (int i = 0; i < PIECES; i++) {
-        if (i == 4) checkSpacesK(state, (cell*)vectorGet(&enemy[4],0), &enemyMoves);
+        if (i == 4) checkSpacesK(board, state, (cell*)vectorGet(&enemy[4],0), &enemyMoves);
         else if (enemy[i].size != 0) {
             for (int j = 0; j < enemy[i].size; j++) {
                 cell* piece = (cell*)vectorGet(&enemy[i], j);
-                pieceMoves(state, piece, i, &enemyMoves);
+                pieceMoves(board, state, piece, i, &enemyMoves);
             }
         }
     }
@@ -181,7 +181,7 @@ void kingMoves(state* state, cell* king, vector* moves) {
  *
  * @return Nothing. All moves deemed playable for pawn is sent to 'moves' vector
  */
-void pawnMoves(cell* pawn, vector* moves) {
+void pawnMoves(cell board[][RANK], cell* pawn, vector* moves) {
     //determine row and column of pawn appearing in 2D array
     int coords[2] = { 0, 0 };
     toCoords(pawn->position, coords);
@@ -200,8 +200,8 @@ void pawnMoves(cell* pawn, vector* moves) {
                 vectorPushBack(moves, move);
             }
         //check for diagonal captures for pawn
-        if (board[coords[0] + 1][coords[1] - 1].hasPiece) checkSpaceP(pawn, coords[0] + 1, coords[1] - 1, moves);
-        if (board[coords[0] + 1][coords[1] + 1].hasPiece) checkSpaceP(pawn, coords[0] + 1, coords[1] + 1, moves);
+        if (board[coords[0] + 1][coords[1] - 1].hasPiece) checkSpaceP(board, pawn, coords[0] + 1, coords[1] - 1, moves);
+        if (board[coords[0] + 1][coords[1] + 1].hasPiece) checkSpaceP(board, pawn, coords[0] + 1, coords[1] + 1, moves);
     }
     else { //search row in front of white pawn
         if (coords[0] + 1 >= 0)
@@ -217,8 +217,8 @@ void pawnMoves(cell* pawn, vector* moves) {
                 vectorPushBack(moves, move);
             }
         //check for diagonal captures for pawn
-        if (board[coords[0] - 1][coords[1] - 1].hasPiece) checkSpaceP(pawn, coords[0] - 1, coords[1] - 1, moves);
-        if (board[coords[0] - 1][coords[1] + 1].hasPiece) checkSpaceP(pawn, coords[0] - 1, coords[1] + 1, moves);
+        if (board[coords[0] - 1][coords[1] - 1].hasPiece) checkSpaceP(board, pawn, coords[0] - 1, coords[1] - 1, moves);
+        if (board[coords[0] - 1][coords[1] + 1].hasPiece) checkSpaceP(board, pawn, coords[0] - 1, coords[1] + 1, moves);
     }
 
     //sort moves alphabetically
@@ -235,26 +235,26 @@ void pawnMoves(cell* pawn, vector* moves) {
  *
  * @return Nothing. The moves for the piece specified that are generated are store in 'moves' vector.
  */
-void pieceMoves(state* state, cell* piece, int index, vector* moves) {
+void pieceMoves(cell board[][RANK], state* state, cell* piece, int index, vector* moves) {
     //swicth case assignment based on piece index and respective function for said piece's move generation
     switch (index) {
     case 0:
-        rookMoves(piece, moves);
+        rookMoves(board, piece, moves);
         break;
     case 1:
-        knightMoves(piece, moves);
+        knightMoves(board, piece, moves);
         break;
     case 2:
-        bishopMoves(piece, moves);
+        bishopMoves(board, piece, moves);
         break;
     case 3:
-        queenMoves(piece, moves);
+        queenMoves(board, piece, moves);
         break;
     case 4:
-        kingMoves(state, piece, moves);
+        kingMoves(board, state, piece, moves);
         break;
     case 5:
-        pawnMoves(piece, moves);
+        pawnMoves(board, piece, moves);
         break;
     }
 }
@@ -269,7 +269,7 @@ void pieceMoves(state* state, cell* piece, int index, vector* moves) {
  * true if move is legal (move will be made),
  * false if move is illegal (error message will be printed)
  */
-bool checkMove(state* state, char* move) {
+bool checkMove(cell board[][RANK], state* state, char* move) {
     //get coordinates of start space and goal space in 2D array
     char start[3] = ""; strncpy(start, &move[0], 2);
     int* startCoords = (int*)calloc(2,sizeof(int)); toCoords(start, startCoords);
@@ -291,35 +291,35 @@ bool checkMove(state* state, char* move) {
         char* posPtr = strchr(pieceTypes, startSpace->piece);
         if (posPtr != NULL) idx = posPtr - pieceTypes;
         else return false;
-        pieceMoves(state, startSpace, idx, &moves); //generate all moves for respective piece
+        pieceMoves(board, state, startSpace, idx, &moves); //generate all moves for respective piece
     }
     else { //piece is white, convert to lowercase for search
         char* posPtr = strchr(pieceTypes, tolower(startSpace->piece));
         if (posPtr != NULL) idx = posPtr - pieceTypes;
         else return false;
-        pieceMoves(state, startSpace, idx, &moves);
+        pieceMoves(board, state, startSpace, idx, &moves);
     }
 
     //search for move in generated moves list
     if (vectorSearch(&moves, move)) { //move was found
         vectorFree(&moves);
-        movePiece(startSpace, goalSpace); //move piece
+        movePiece(board, startSpace, goalSpace); //move piece
         if (idx == 4) { //if king was moved
             //check if castkling moved was made on queen side
             if (startCoords[1] - goalCoords[1] == 2) {
                 //move rook accordingly
                 cell* oldRook = &board[goalCoords[0]][0];
                 cell* newRook = &board[goalCoords[0]][goalCoords[1] + 1];
-                movePiece(oldRook, newRook);
+                movePiece(board, oldRook, newRook);
             } //check if castkling moved was made on king side
             else if (startCoords[1] - goalCoords[1] == -2) {
                 //move rook accordingly
                 cell* oldRook = &board[goalCoords[0]][RANK - 1];
                 cell* newRook = &board[goalCoords[0]][goalCoords[1] - 1];
-                movePiece(oldRook, newRook);
+                movePiece(board, oldRook, newRook);
             }
         }
-        updateState(state, goalSpace, flag); //update state to indicate move played
+        updateState(board, state, goalSpace, flag); //update state to indicate move played
         free(startCoords); free(goalCoords);
         return true;
     }

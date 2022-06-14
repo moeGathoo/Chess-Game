@@ -7,7 +7,7 @@
  *
  * @return Nothing. Pieces are added to the board.
  */
-void addPieces(char* fen) {
+void addPieces(cell board[][RANK], char* fen) {
     int row = 0, col = 0;
     for (int i = 0; i < strlen(fen); i++) {
         char c = fen[i];
@@ -26,7 +26,7 @@ void addPieces(char* fen) {
             col += skip;
         }
     }
-    getPositions();
+    getPositions(board);
 }
 
 /**
@@ -37,7 +37,7 @@ void addPieces(char* fen) {
  * @return Nothing. Empty board is initialized and pieces are added
  * to relevant spaces based on fen string.
  */
-void initBoard(char* fen) {
+void initBoard(cell board[][RANK], char* fen) {
     for (int i = RANK - 1; i >= 0; i--) {
         for (int j = FILEA; j < FILEA + RANK; j++) {
             //convert rank and file to chars
@@ -49,7 +49,7 @@ void initBoard(char* fen) {
             board[i][j - FILEA].position = pos; //modify board position attribute
         }
     }
-    addPieces(fen); //add pieces to board based on string
+    addPieces(board, fen); //add pieces to board based on string
 }
 
 /**
@@ -59,7 +59,7 @@ void initBoard(char* fen) {
  *
  * @return Nothing. All pieces are removed from the board.
  */
-void resetBoard() {
+void resetBoard(cell board[][RANK]) {
     for (int i = 0; i < RANK; i++) {
         for (int j = 0; j < RANK; j++) {
             cell* space = &board[i][j]; //point to space on board
@@ -85,7 +85,7 @@ void resetBoard() {
  *
  * TODO: add flag for pawn movements to reduce to one function
  */
-void checkSpace(cell* piece, int row, int col, vector* moves) {
+void checkSpace(cell board[][RANK], cell* piece, int row, int col, vector* moves) {
     if (row >= 0 && row < RANK && col >= 0 && col < RANK) { //row and col must be within bounds of spaces on board
         cell space = board[row][col];
         char *move = (char*)malloc(sizeof(piece->position) + sizeof(space.position));
@@ -112,7 +112,7 @@ void checkSpace(cell* piece, int row, int col, vector* moves) {
  * vector the pointer 'moves' points to. Adds piece position plus space position
  * e.g. d2d3
  */
-void checkSpaceP(cell* piece, int row, int col, vector* moves) {
+void checkSpaceP(cell board[][RANK], cell* piece, int row, int col, vector* moves) {
     if (row >= 0 && row < RANK && col >= 0 && col < RANK) {
         cell space = board[row][col];
         char* move = (char*)malloc(sizeof(piece->position) + sizeof(space.position));;
@@ -132,7 +132,7 @@ void checkSpaceP(cell* piece, int row, int col, vector* moves) {
  * vector the pointer 'moves' points to. Adds piece position plus space position
  * e.g. d2d3
  */
-void checkSpacesK(state* game, cell* king, vector* moves) {
+void checkSpacesK(cell board[][RANK], state* game, cell* king, vector* moves) {
     //convert kings position to row and column for array position
     int coords[2] = { 0, 0 };
     if (king == NULL) {
@@ -142,14 +142,14 @@ void checkSpacesK(state* game, cell* king, vector* moves) {
     toCoords(king->position, coords);
 
     //checks all spaces in 3x3 neighbourhood of king
-    checkSpace(king, coords[0] + 1, coords[1], moves);
-    checkSpace(king, coords[0] - 1, coords[1], moves);
-    checkSpace(king, coords[0], coords[1] + 1, moves);
-    checkSpace(king, coords[0], coords[1] - 1, moves);
-    checkSpace(king, coords[0] + 1, coords[1] + 1, moves);
-    checkSpace(king, coords[0] - 1, coords[1] - 1, moves);
-    checkSpace(king, coords[0] + 1, coords[1] - 1, moves);
-    checkSpace(king, coords[0] - 1, coords[1] + 1, moves);
+    checkSpace(board, king, coords[0] + 1, coords[1], moves);
+    checkSpace(board, king, coords[0] - 1, coords[1], moves);
+    checkSpace(board, king, coords[0], coords[1] + 1, moves);
+    checkSpace(board, king, coords[0], coords[1] - 1, moves);
+    checkSpace(board, king, coords[0] + 1, coords[1] + 1, moves);
+    checkSpace(board, king, coords[0] - 1, coords[1] - 1, moves);
+    checkSpace(board, king, coords[0] + 1, coords[1] - 1, moves);
+    checkSpace(board, king, coords[0] - 1, coords[1] + 1, moves);
 
     //sort list of moves alphabetically
     //sort(moves->begin(), moves->end());
@@ -165,7 +165,7 @@ void checkSpacesK(state* game, cell* king, vector* moves) {
  * @return Nothing. If a castle move is available based on state, it will
  * be added to the list of moves.
  */
-void castle(state* state, cell* king, vector* moves) {
+void castle(cell board[][RANK], state* state, cell* king, vector* moves) {
     if (state->castle == "-") return; //no castling moves available
     bool kSide = false, qSide = false; //initialize queen and king side castling flags to false
     
@@ -208,11 +208,11 @@ void castle(state* state, cell* king, vector* moves) {
  * @return Nothing. The attributes of startSpace and goalSpace are updated
  * to reflect moving the piece.
  */
-void movePiece(cell* startSpace, cell* goalSpace) {
+void movePiece(cell board[][RANK], cell* startSpace, cell* goalSpace) {
     goalSpace->piece = startSpace->piece; startSpace->piece = '-';
     goalSpace->colour = startSpace->colour; startSpace->colour = '-';
     goalSpace->hasPiece = true; startSpace->hasPiece = false;
-    getPositions();
+    getPositions(board);
 }
 
 /**
@@ -222,7 +222,7 @@ void movePiece(cell* startSpace, cell* goalSpace) {
  *
  * @return Nothing. Current board is printed to terminal.
  */
-void printBoard() {
+void printBoard(cell board[][RANK]) {
     for (int i = 0; i < RANK; i++) {
         for (int j = 0; j < RANK; j++) {
             printf("%c\t", board[i][j].piece);

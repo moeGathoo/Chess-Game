@@ -42,7 +42,7 @@ typedef struct cell {
 //gobal variables used across project
 extern char pieceTypes[6];
 extern int pieceValues[6];
-extern cell board[RANK][RANK];
+//extern cell board[RANK][RANK];
 extern vector black[PIECES];
 extern vector white[PIECES];
 
@@ -59,35 +59,35 @@ void vectorClear();
 void vectorFree(vector* v);
 
 //board functions
-void addPieces(char* fen);
-void initBoard(char* fen);
-void resetBoard();
-void checkSpace(cell* piece, int row, int col, vector* moves);
-void checkSpaceP(cell* piece, int row, int col, vector* moves);
-void checkSpacesK(state* game, cell* king, vector* moves);
-void castle(state* state, cell* king, vector* moves);
-void movePiece(cell* startSpace, cell* goalSpace);
-void printBoard();
+void addPieces(cell board[][RANK], char* fen);
+void initBoard(cell board[][RANK], char* fen);
+void resetBoard(cell board[][RANK]);
+void checkSpace(cell board[][RANK], cell* piece, int row, int col, vector* moves);
+void checkSpaceP(cell board[][RANK], cell* piece, int row, int col, vector* moves);
+void checkSpacesK(cell board[][RANK], state* game, cell* king, vector* moves);
+void castle(cell board[][RANK], state* state, cell* king, vector* moves);
+void movePiece(cell board[][RANK], cell* startSpace, cell* goalSpace);
+void printBoard(cell board[][RANK]);
 
 //state functions
 state initState(char* fen, char side, char* castle, char* enPassant, int halfMove, int fullMove);
 void toCoords(char* pos, int* coords);
-void getPositions();
-void updateState(state* state, cell* piece, bool flag);
+void getPositions(cell board[][RANK]);
+void updateState(cell board[][RANK], state* state, cell* piece, bool flag);
 void printState(state* currState);
 
 //moves functions
-void rookMoves(cell* rook, vector* moves);
-void knightMoves(cell* knight, vector* moves);
-void bishopMoves(cell* bishop, vector* moves);
-void queenMoves(cell* queen, vector* moves);
-void kingMoves(state* state, cell* king, vector* moves);
-void pawnMoves(cell* pawn, vector* moves);
-void pieceMoves(state* state, cell* piece, int index, vector* moves);
-bool checkMove(state* state, char* move);
+void rookMoves(cell board[][RANK], cell* rook, vector* moves);
+void knightMoves(cell board[][RANK], cell* knight, vector* moves);
+void bishopMoves(cell board[][RANK], cell* bishop, vector* moves);
+void queenMoves(cell board[][RANK], cell* queen, vector* moves);
+void kingMoves(cell board[][RANK], state* state, cell* king, vector* moves);
+void pawnMoves(cell board[][RANK], cell* pawn, vector* moves);
+void pieceMoves(cell board[][RANK], state* state, cell* piece, int index, vector* moves);
+bool checkMove(cell board[][RANK], state* state, char* move);
 
 //engine functions
-void assign(char* bestMove);
+void assign(cell **board, char* fen);
 int evaluation(state* state);
-int advEvaluation(state* state);
-int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, bool first);
+int advEvaluation(cell board[][RANK], state* state);
+int alphaBeta(cell board[][RANK], state currState, int depth, int alpha, int beta, char* bestMove, bool first);

@@ -37,7 +37,7 @@ int evaluation(state* state) {
  *
  * @return int - Advanced score based on criteria mentioned above.
  */
-int advEvaluation(state* state) {
+int advEvaluation(cell board[][RANK], state* state) {
     //material score: weightings of pieces on board
     int material = evaluation(state);
     if (material == 10000 || material == -10000) return material;
@@ -49,12 +49,12 @@ int advEvaluation(state* state) {
         if (black[i].size != 0)
             for (int j = 0; j < black[i].size; j++) {
                 cell* piece = (cell*)vectorGet(&black[i], j);
-                pieceMoves(state, piece, i, &blackMoves);
+                pieceMoves(board, state, piece, i, &blackMoves);
             }
         if (white[i].size != 0)
             for (int j = 0; j < white[i].size; j++) {
                 cell* piece = (cell*)vectorGet(&white[i], j);
-                pieceMoves(state, piece, i, &whiteMoves);
+                pieceMoves(board, state, piece, i, &whiteMoves);
             }
     }
     int mobility = whiteMoves.size - blackMoves.size;
@@ -122,11 +122,11 @@ int advEvaluation(state* state) {
  * @return int - Score after having search tree. The best move to make based on the score is stored
  * in the bestMove string.
  */
-int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, bool first) {
+int alphaBeta(cell board[][RANK], state currState, int depth, int alpha, int beta, char* bestMove, bool first) {
     //stop searching if game is over or max depth reached
     //return advanvced evaluation of board
     if (currState.gameOver || depth <= 0) {
-        return advEvaluation(&currState);
+        return advEvaluation(board, &currState);
     }
 
     //determine which side is playing and generate all moves possible to play
@@ -138,7 +138,7 @@ int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, b
         if (pieces[i].size != 0)
             for (int j = 0; j < pieces[i].size; j++) {
                 cell* piece = (cell*)vectorGet(&pieces[i], j);
-                pieceMoves(&currState, piece, i, &moves);
+                pieceMoves(board, &currState, piece, i, &moves);
             }
     }
 
@@ -155,12 +155,12 @@ int alphaBeta(state currState, int depth, int alpha, int beta, char* bestMove, b
         free(startCoords); free(goalCoords);
 
         state nextState = currState; //next state which will store board information after making move
-        movePiece(startSpace, goalSpace); //move piece
-        updateState(&nextState, goalSpace, false); //updates next state indicating move
-        int eval = (-1) * alphaBeta(nextState, depth - 1, (-1) * beta, (-1) * alpha, bestMove, false); //calculate score of baord after move has been made
+        movePiece(board, startSpace, goalSpace); //move piece
+        updateState(board, &nextState, goalSpace, false); //updates next state indicating move
+        int eval = (-1) * alphaBeta(board, nextState, depth - 1, (-1) * beta, (-1) * alpha, bestMove, false); //calculate score of baord after move has been made
         //undo move to restore board's original state
-        resetBoard();
-        addPieces(currState.fen);
+        resetBoard(board);
+        addPieces(board, currState.fen);
         //stop searching tree if evaluation is greater than beta threshold
         if (eval >= beta) {
             vectorFree(&moves);

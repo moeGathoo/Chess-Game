@@ -3,7 +3,6 @@
 //initializes values of all global variables
 char pieceTypes[6] = { 'r', 'n', 'b', 'q', 'k', 'p' };    //types of pieces on board
 int pieceValues[6] = { 50, 30, 30, 90, 900, 10 };         //piece weightings for search and evaluation algorithms
-cell board[RANK][RANK];
 vector black[PIECES];
 vector white[PIECES];
 
@@ -29,13 +28,14 @@ int main(int argc, char* argv[]) {
     }
 
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
-    initBoard(game.fen);
+    cell board[RANK][RANK];
+    initBoard(board, game.fen);
     
-    while (!game.gameOver) {
+    for (int i = 0; i < 10; i++) {
         char move[5] = "";
-        alphaBeta(game, 4, -10001, 10001, &move[0], true);
+        alphaBeta(board, game, 4, -10001, 10001, &move[0], true);
         printf("%s\n", move);
-        checkMove(&game, move);
+        checkMove(board, &game, move);
         if (game.gameOver) break; //end game of game is over
     }
 

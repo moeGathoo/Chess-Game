@@ -46,7 +46,7 @@ void toCoords(char* pos, int* coords) {
  * @return Nothing. The respective vectors storing the different piece
  * type's positions are updated with piece positions
  */
-void getPositions() {
+void getPositions(cell board[][RANK]) {
     vectorClear();
 
     for (int i = 0; i < RANK; i++) {
@@ -88,7 +88,7 @@ void getPositions() {
  *
  * @return Nothing. State object is updated.
  */
-void updateState(state* state, cell* piece, bool flag) {
+void updateState(cell board[][RANK], state* state, cell* piece, bool flag) {
     //create new fen string representing board by traversing in row-major order
     char newFen[STR_BUFFER] = ""; char count;
     for (int i = 0; i < RANK; i++) {
