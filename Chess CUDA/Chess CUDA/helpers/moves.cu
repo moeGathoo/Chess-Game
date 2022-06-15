@@ -190,12 +190,14 @@ void pawnMoves(cell board[][RANK], cell* pawn, vector* moves) {
         if (coords[0] + 1 < RANK)
             if (!board[coords[0] + 1][coords[1]].hasPiece) {
                 char* move = (char*)malloc(sizeof(pawn->position) + sizeof(board[coords[0] + 1][coords[1]].position));
+                if (move == nullptr) { printf("Allocation error."); return; }
                 strcpy(move, pawn->position); strcat(move, board[coords[0] + 1][coords[1]].position);
                 vectorPushBack(moves, move);
             }
         if (coords[0] == 1 && !board[coords[0] + 1][coords[1]].hasPiece) //check for possible 2 space move if pawn is in starting rank
             if (!board[coords[0] + 2][coords[1]].hasPiece) {
                 char* move = (char*)malloc(sizeof(pawn->position) + sizeof(board[coords[0] + 2][coords[1]].position));
+                if (move == nullptr) { printf("Allocation error."); return; }
                 strcpy(move, pawn->position); strcat(move, board[coords[0] + 2][coords[1]].position);
                 vectorPushBack(moves, move);
             }
@@ -207,12 +209,14 @@ void pawnMoves(cell board[][RANK], cell* pawn, vector* moves) {
         if (coords[0] + 1 >= 0)
             if (!board[coords[0] - 1][coords[1]].hasPiece) {
                 char* move = (char*)malloc(sizeof(pawn->position) + sizeof(board[coords[0] - 1][coords[1]].position));
+                if (move == nullptr) { printf("Allocation error."); return; }
                 strcpy(move, pawn->position); strcat(move, board[coords[0] - 1][coords[1]].position);
                 vectorPushBack(moves, move);
             }
         if (coords[0] == 6 && !board[coords[0] - 1][coords[1]].hasPiece) //check for possible 2 space move if pawn is in starting rank
             if (!board[coords[0] - 2][coords[1]].hasPiece) {
                 char* move = (char*)malloc(sizeof(pawn->position) + sizeof(board[coords[0] - 2][coords[1]].position));
+                if (move == nullptr) { printf("Allocation error."); return; }
                 strcpy(move, pawn->position); strcat(move, board[coords[0] - 2][coords[1]].position);
                 vectorPushBack(moves, move);
             }
@@ -277,6 +281,7 @@ bool checkMove(cell board[][RANK], state* state, char* move) {
     int* goalCoords = (int*)calloc(2,sizeof(int)); toCoords(goal, goalCoords);
 
     //get pointers to said spaces on board
+    if (startCoords == nullptr || goalCoords == nullptr) { printf("Allocation error."); return false; }
     cell* startSpace = &board[startCoords[0]][startCoords[1]];
     cell* goalSpace = &board[goalCoords[0]][goalCoords[1]];
 

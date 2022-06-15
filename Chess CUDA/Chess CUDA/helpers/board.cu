@@ -44,9 +44,12 @@ void initBoard(cell board[][RANK], char* fen) {
             char file[2]; sprintf(file, "%c", j);
             char rank[2]; sprintf(rank, "%d", RANK - i);
             //get position string
-            char* pos = (char*)malloc(2);
+            char* pos = (char*)malloc(2); if (pos == nullptr) { printf("Allocation error."); return; }
             strcpy(pos, file); strcat(pos, rank);
             board[i][j - FILEA].position = pos; //modify board position attribute
+            board[i][j - FILEA].colour = '-';
+            board[i][j - FILEA].hasPiece = false;
+            board[i][j - FILEA].piece = '-';
         }
     }
     addPieces(board, fen); //add pieces to board based on string
@@ -89,7 +92,8 @@ void checkSpace(cell board[][RANK], cell* piece, int row, int col, vector* moves
     if (row >= 0 && row < RANK && col >= 0 && col < RANK) { //row and col must be within bounds of spaces on board
         cell space = board[row][col];
         char *move = (char*)malloc(sizeof(piece->position) + sizeof(space.position));
-        strcpy(move, piece->position); strcat(move, space.position);
+        if (move != NULL) { strcpy(move, piece->position); strcat(move, space.position); }
+        else { printf("Allocation error."); return; }
         if (!space.hasPiece) { //if the space is empty, add it moves
             vectorPushBack(moves, move);
         }
@@ -115,7 +119,8 @@ void checkSpace(cell board[][RANK], cell* piece, int row, int col, vector* moves
 void checkSpaceP(cell board[][RANK], cell* piece, int row, int col, vector* moves) {
     if (row >= 0 && row < RANK && col >= 0 && col < RANK) {
         cell space = board[row][col];
-        char* move = (char*)malloc(sizeof(piece->position) + sizeof(space.position));;
+        char* move = (char*)malloc(sizeof(piece->position) + sizeof(space.position));
+        if (move == nullptr) { printf("Allocation error."); return; }
         strcpy(move, piece->position); strcat(move, space.position);
         if (piece->colour != space.colour)
             vectorPushBack(moves, move);
@@ -179,11 +184,13 @@ void castle(cell board[][RANK], state* state, cell* king, vector* moves) {
 
     //get king row and column
     int* coords = (int*)calloc(2, sizeof(int));
+    if (coords == nullptr) { printf("Allocation error."); return; }
     toCoords(king->position, coords);
     if (kSide) {
         //if all spaces between king and rook is empty on kings side, add move
         if (!board[coords[0]][coords[1] + 1].hasPiece && !board[coords[0]][coords[1] + 2].hasPiece) {
             char* move = (char*)malloc(sizeof(king->position) + sizeof(board[coords[0]][coords[1] + 2].position));
+            if (move == nullptr) { printf("Allocation error."); return; }
             strcpy(move, king->position); strcat(move, board[coords[0]][coords[1] + 2].position);
             vectorPushBack(moves, move);
         }
@@ -192,6 +199,7 @@ void castle(cell board[][RANK], state* state, cell* king, vector* moves) {
         //if all spaces between king and rook is empty on queens side, add move
         if (!board[coords[0]][coords[1] - 1].hasPiece && !board[coords[0]][coords[1] - 2].hasPiece && !board[coords[0]][coords[1] - 3].hasPiece) {
             char* move = (char*)malloc(sizeof(king->position) + sizeof(board[coords[0]][coords[1] - 2].position));
+            if (move == nullptr) { printf("Allocation error."); return; }
             strcpy(move, king->position); strcat(move, board[coords[0]][coords[1] - 2].position);
             vectorPushBack(moves, move);
         }

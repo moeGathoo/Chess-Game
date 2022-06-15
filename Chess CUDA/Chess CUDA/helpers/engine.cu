@@ -66,23 +66,29 @@ int advEvaluation(cell board[][RANK], state* state) {
         char* blackMove = (char*)vectorGet(&blackMoves, i);
         char goal[3] = ""; strncpy(goal, &blackMove[2], 2);
         toCoords(goal, goalCoords);
-        if (board[goalCoords[0]][goalCoords[1]].hasPiece) {
-            blackScore++;
-            //bonus points if piece being threatened is oppositions king
-            if (board[goalCoords[0]][goalCoords[1]].piece == 'K')
-                blackScore += 10;
+        if (goalCoords != NULL) {
+            if (board[goalCoords[0]][goalCoords[1]].hasPiece) {
+                blackScore++;
+                //bonus points if piece being threatened is oppositions king
+                if (board[goalCoords[0]][goalCoords[1]].piece == 'K')
+                    blackScore += 10;
+            }
         }
+        else { printf("Allocation error."); return -1; }
     }
     int whiteScore = 0;
     for (int i = 0; i < whiteMoves.size; i++) {
         char* whiteMove = (char*)vectorGet(&whiteMoves, i);
         char goal[3] = ""; strncpy(goal, &whiteMove[2], 2);
         toCoords(goal, goalCoords);
-        if (board[goalCoords[0]][goalCoords[1]].hasPiece) {
-            whiteScore++;
-            if (board[goalCoords[0]][goalCoords[1]].piece == 'k')
-                whiteScore += 10;
+        if (goalCoords != NULL) {
+            if (board[goalCoords[0]][goalCoords[1]].hasPiece) {
+                whiteScore++;
+                if (board[goalCoords[0]][goalCoords[1]].piece == 'k')
+                    whiteScore += 10;
+            }
         }
+        else { printf("Allocation error."); return -1; }
     }
     free(goalCoords);
     int attack = whiteScore - blackScore;
@@ -150,10 +156,14 @@ int alphaBeta(cell board[][RANK], state currState, int depth, int alpha, int bet
         int* startCoords = (int*)calloc(2, sizeof(int)); toCoords(start, startCoords);
         char goal[3] = ""; strncpy(goal, &move[2], 2);
         int* goalCoords = (int*)calloc(2, sizeof(int)); toCoords(goal, goalCoords);
-        cell* startSpace = &board[startCoords[0]][startCoords[1]];
-        cell* goalSpace = &board[goalCoords[0]][goalCoords[1]];
+        cell* startSpace{}; cell* goalSpace{};
+        if (startCoords != NULL && goalCoords != NULL) {
+            startSpace = &board[startCoords[0]][startCoords[1]];
+            goalSpace = &board[goalCoords[0]][goalCoords[1]];
+        } else { printf("Allocation error."); return -1; }
         free(startCoords); free(goalCoords);
 
+        if (startSpace == nullptr || goalSpace == nullptr) { printf("Allocation error."); return -1; }
         state nextState = currState; //next state which will store board information after making move
         movePiece(board, startSpace, goalSpace); //move piece
         updateState(board, &nextState, goalSpace, false); //updates next state indicating move
@@ -175,9 +185,4 @@ int alphaBeta(cell board[][RANK], state currState, int depth, int alpha, int bet
     vectorFree(&moves);
 
     return alpha;
-}
-
-void assign(char* bestMove) {
-    char* move = "Hello";
-    bestMove = move;
 }

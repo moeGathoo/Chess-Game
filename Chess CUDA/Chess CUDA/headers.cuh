@@ -1,16 +1,17 @@
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
 
 //definitions used across project
 #define PIECES 6        //number of piece types
 #define RANK 8          //number of ranks (and files)
 #define FILEA 'a'       //starting file count
 #define STR_BUFFER 128  //buffer for fen string
+#define BOARD_WIDTH 8
 
 //vector structure
 typedef struct vector {
@@ -34,8 +35,8 @@ typedef struct state {
 //structure to represnt space on board
 typedef struct cell {
     char *position;       //name of position eg. a5, b3
-    bool hasPiece = false;  //does space have a piece
-    char piece = '-';       //if not, default indication
+    bool hasPiece;  //does space have a piece
+    char piece;       //if not, default indication
     char colour;            //if yes, what color is the piece
 } cell;
 
@@ -87,7 +88,9 @@ void pieceMoves(cell board[][RANK], state* state, cell* piece, int index, vector
 bool checkMove(cell board[][RANK], state* state, char* move);
 
 //engine functions
-void assign(cell **board, char* fen);
 int evaluation(state* state);
 int advEvaluation(cell board[][RANK], state* state);
 int alphaBeta(cell board[][RANK], state currState, int depth, int alpha, int beta, char* bestMove, bool first);
+
+//kernels
+__global__ void kernel(cell* board, char* pieceTypes, int* pieceValues, int* scores);
