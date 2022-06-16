@@ -15,6 +15,8 @@
 #define PIECES 6    //number of piece types
 #define RANK 8      //number of ranks (and files)
 #define FILE 'a'    //starting file count
+#define NUM_PROCS 8
+#define SIZE 8
 
 using namespace std;
 
@@ -76,3 +78,6 @@ int evaluation(state* state);
 int miniMax(state state, int depth, string* bestMove, bool first);
 int advEvaluation(state *state);
 int alphaBeta(state currState, int depth, int alpha, int beta, string* bestMove, bool first);
+
+//mpi
+int parallelAlphaBeta(state currState, int size, int rank, int depth, int alpha, int beta, string *bestMove, bool first);

@@ -30,19 +30,62 @@ vector<cell*> white[PIECES];                            //array of vectors for e
  * @return int 
  */
 int main(int argc, char* argv[]) {
-    state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));
+    string input[] = {"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+                      "w",
+                      "KQkq",
+                      "-",
+                      "0",
+                      "1"};
+    state game = initState(input[0], input[1][0], input[2], input[3], stoi(input[4]), stoi(input[5]));
     //set up board
     initBoard(game.fen);
+    int rank, size;
+
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    string move; char bestMove[4]; int scores[NUM_PROCS];
+
+    double start, end;
+    start = MPI_Wtime();
+    int score = parallelAlphaBeta(game, size, rank, 4, -10001, 10001, &move, true);
+    MPI_Barrier(MPI_COMM_WORLD);
+    end = MPI_Wtime();
+    if (rank == 0)
+        cout << "Parallel implementation time: " << end-start << endl;
+
+    int max = -10001;
+    MPI_Gather(&score, 1, MPI_INT, &scores, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    if (rank == 0)
+        for (int i = 0; i < NUM_PROCS; i++)
+            if (scores[i] > max) max = scores[i];
+
+    MPI_Bcast(&max, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    if (max == score) {
+        strncpy(bestMove, (const char*)move.c_str(), 4);
+        for (int i = 0; i < NUM_PROCS; i++) {
+            if (i == rank) continue;
+            MPI_Send(move.c_str(), move.size(), MPI_CHAR, i, 0, MPI_COMM_WORLD);
+        }
+    }
+    else MPI_Recv(bestMove, 4, MPI_CHAR, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+    //string play(bestMove);
+    //checkMove(&game, &play);
+    //printBoard(); cout << endl;
+    cout << bestMove << endl;
+
+    MPI_Finalize();
 
     //plays game up to 10 full moves using alpha-beta pruning algorithm
     //prints move made
     // for (int i = 0; i < 10; i++) {
-        string move;
-        alphaBeta(game, 4, -10001, 10001, &move, true);
-        // checkMove(&game, &move);
-        printBoard();
+    //     string move;
+    //     alphaBeta(game, 4, -10001, 10001, &move, true);
+    //     checkMove(&game, &move);
     //     cout << move << endl;
     //     if (game.gameOver) break; //end game of game is over
     // }
+
     return 0;
 }
