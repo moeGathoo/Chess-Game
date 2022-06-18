@@ -30,6 +30,8 @@ int main(int argc, char* argv[]) {
     state game = initState(argv[1], *argv[2], argv[3], argv[4], atoi(argv[5]), atoi(argv[6]));    
     cell board[RANK][RANK];
     initBoard(board, game.fen);
+    addPieces(board, game.fen);
+    printBoard(board); printf("\n");
 
     //for (int i = 0; i < 10; i++) {
     //    char move[5] = "";
@@ -46,7 +48,7 @@ int main(int argc, char* argv[]) {
         for (int j = 0; j < RANK; j++)
             hA[i][j] = 0;*/
 
-    size_t numBytes = sizeof(cell) * BOARD_WIDTH * BOARD_WIDTH;
+    /*size_t numBytes = sizeof(cell) * BOARD_WIDTH * BOARD_WIDTH;
     int* hScores = (int*)malloc(PIECES * 2 * sizeof(int));
 
     cell* dBoard = 0;
@@ -74,7 +76,7 @@ int main(int argc, char* argv[]) {
     cudaFree(dPieceTypes);
     cudaFree(dPieceValues);
     cudaFree(dScores);
-    free(hScores);
+    free(hScores);*/
 
     /*for (int i = 0; i < RANK; i++) {
         for (int j = 0; j < RANK; j++) {
@@ -82,6 +84,23 @@ int main(int argc, char* argv[]) {
         }
         printf("\n");
     }*/
+
+    vector enemyMoves; initVector(&enemyMoves);
+    rookMoves(board, &board[4][0], &enemyMoves);
+    ///*for (int i = 0; i < BOARD_WIDTH; i++) {
+    //    for (int j = 0; j < BOARD_WIDTH; j++) {
+    //        cell piece = board[i][j];
+    //        if (piece.hasPiece && piece.colour != game.side) {
+    //            char* pos = strChr(pieceType, piece.piece);
+    //            int idx = -1;
+    //            if (pos != NULL) idx = pos - pieceType;
+    //            pieceMoves(board, &game, &piece, idx, &enemyMoves);
+    //        }
+    //    }
+    //}*/
+    for (int i = 0; i < enemyMoves.size; i++) {
+        printf("%s\n", (char*)vectorGet(&enemyMoves, i));
+    }
 
     for (int i = 0; i < PIECES; i++) {
         vectorFree(&black[i]);

@@ -1,4 +1,4 @@
-﻿Build started 2022/06/15 02:38:19.
+﻿Build started 2022/06/17 16:21:28.
 Logging verbosity is set to: Normal.     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "x64\Debug\Chess CUDA.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -9,7 +9,7 @@ Logging verbosity is set to: Normal.     1>Project "D:\University\Honours\Semest
        AddCudaCompileDeps:
        Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
        AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /D__CUDACC_VER_MAJOR__=11 /D__CUDACC_VER_MINOR__=6 /DWIN32 /DWIN64 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" /I. /FIcuda_runtime.h /c "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\kernels.cu" 
+       Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
        AddCudaCompileDeps:
        Skipping target "AddCudaCompileDeps" because all output files are up-to-date with respect to the input files.
        AddCudaCompileDeps:
@@ -37,14 +37,15 @@ Logging verbosity is set to: Normal.     1>Project "D:\University\Honours\Semest
      1>CudaBuildCore:
        Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
      1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
-     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:4) on node 3 (CudaBuildCore target(s)).
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:4) on node 4 (CudaBuildCore target(s)).
+     1>CudaBuildCore:
+       Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:5) on node 3 (CudaBuildCore target(s)).
      1>CudaBuildCore:
        Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
      1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
-     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:7) on node 4 (CudaBuildCore target(s)).
-     1>CudaBuildCore:
-         Compiling CUDA source file helpers\kernels.cu...
-     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:5) on node 5 (CudaBuildCore target(s)).
+     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
+     1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:7) on node 5 (CudaBuildCore target(s)).
      1>CudaBuildCore:
        Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
      1>Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1) is building "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (1:6) on node 6 (CudaBuildCore target(s)).
@@ -57,21 +58,11 @@ Logging verbosity is set to: Normal.     1>Project "D:\University\Honours\Semest
        Skipping target "CudaBuildCore" because all output files are up-to-date with respect to the input files.
      1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
      1>CudaBuildCore:
-         cmd.exe /C "C:\Users\migat\AppData\Local\Temp\tmped0ed37bec5f4259b93b81c1718f63ae.cmd"
+         cmd.exe /C "C:\Users\migat\AppData\Local\Temp\tmp11e0b04a23b74dd3b3072850a354db6e.cmd"
          "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\chess.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu"
          
          D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\chess.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu" 
-     1>CudaBuildCore:
-         cmd.exe /C "C:\Users\migat\AppData\Local\Temp\tmpa6d0f38ecdaa4ae8a5c030ccd4b6d4ba.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\kernels.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\kernels.cu"
-         
-         D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\kernels.cu.obj" "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\helpers\kernels.cu" 
-     1>D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(53): warning #177-D: variable "dScore" was declared but never referenced
-         
          chess.cu
-       CudaBuildCore:
-         kernels.cu
-     1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
      1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target(s)).
      1>Link:
          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.exe" /INCREMENTAL /ILK:"x64\Debug\Chess CUDA.ilk" /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudart.lib cudadevrt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\x64\Debug\Chess CUDA.lib" /MACHINE:X64 "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\x64\Debug\chess.cu.obj"
@@ -88,13 +79,7 @@ Logging verbosity is set to: Normal.     1>Project "D:\University\Honours\Semest
      1>Done Building Project "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (Build target(s)).
 
 Build succeeded.
-
-       "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (Build target) (1) ->
-       "D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\Chess CUDA.vcxproj" (CudaBuildCore target) (1:2) ->
-       (CudaBuildCore target) -> 
-         D:\University\Honours\Semester 1\High Performance Computing\Project\Chess-Game\Chess CUDA\Chess CUDA\chess.cu(53): warning #177-D: variable "dScore" was declared but never referenced
-
-    1 Warning(s)
+    0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.02
+Time Elapsed 00:00:02.62
