@@ -41,51 +41,46 @@ int main(int argc, char* argv[]) {
     initBoard(game.fen);
     int rank, size;
 
+    //initialize MPI
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     string move; char bestMove[4]; int scores[NUM_PROCS];
 
-    double start, end;
-    start = MPI_Wtime();
-    int score = parallelAlphaBeta(game, size, rank, 4, -10001, 10001, &move, true);
-    MPI_Barrier(MPI_COMM_WORLD);
-    end = MPI_Wtime();
-    if (rank == 0)
-        cout << "Parallel implementation time: " << end-start << endl;
+    for (int i = 0; i < 10; i++){
+        double start, end;
+        //have each processor perform alpha beta on their columns pieces
+        //time how long they collectively take to return a move 
+        start = MPI_Wtime();
+        int score = parallelAlphaBeta(game, size, rank, 4, -10001, 10001, &move, true);
+        MPI_Barrier(MPI_COMM_WORLD);
+        end = MPI_Wtime();
+        if (rank == 0)
+            cout << "Parallel implementation time: " << end-start << endl;
 
-    int max = -10001;
-    MPI_Gather(&score, 1, MPI_INT, &scores, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    if (rank == 0)
-        for (int i = 0; i < NUM_PROCS; i++)
-            if (scores[i] > max) max = scores[i];
+        //gather evaluated scores from every processor to master processor
+        int max = -10001;
+        MPI_Gather(&score, 1, MPI_INT, &scores, 1, MPI_INT, 0, MPI_COMM_WORLD);
+        if (rank == 0)
+            for (int i = 0; i < NUM_PROCS; i++) //get maximum score
+                if (scores[i] > max) max = scores[i];
 
-    MPI_Bcast(&max, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    if (max == score) {
-        strncpy(bestMove, (const char*)move.c_str(), 4);
-        for (int i = 0; i < NUM_PROCS; i++) {
-            if (i == rank) continue;
-            MPI_Send(move.c_str(), move.size(), MPI_CHAR, i, 0, MPI_COMM_WORLD);
+        MPI_Bcast(&max, 1, MPI_INT, 0, MPI_COMM_WORLD); //broadcast maximum score to every processor
+        if (max == score) { //find processor with highest score
+            strncpy(bestMove, (const char*)move.c_str(), 4);
+            for (int i = 0; i < NUM_PROCS; i++) {
+                if (i == rank) continue;
+                MPI_Send(move.c_str(), move.size(), MPI_CHAR, i, 0, MPI_COMM_WORLD); //send said processors evaluated move to every other processor
+            }
         }
-    }
-    else MPI_Recv(bestMove, 4, MPI_CHAR, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        else MPI_Recv(bestMove, 4, MPI_CHAR, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-    //string play(bestMove);
-    //checkMove(&game, &play);
-    //printBoard(); cout << endl;
-    cout << bestMove << endl;
+        move = bestMove;
+        checkMove(&game, &move); //perform move
+        //if (rank == 0) cout << move << endl;
+    }
 
     MPI_Finalize();
-
-    //plays game up to 10 full moves using alpha-beta pruning algorithm
-    //prints move made
-    // for (int i = 0; i < 10; i++) {
-    //     string move;
-    //     alphaBeta(game, 4, -10001, 10001, &move, true);
-    //     checkMove(&game, &move);
-    //     cout << move << endl;
-    //     if (game.gameOver) break; //end game of game is over
-    // }
 
     return 0;
 }

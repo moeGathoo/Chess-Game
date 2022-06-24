@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Chess-Game/Chess MPI'
+make: 'chess' is up to date.
+make: Leaving directory '/mnt/d/University/Honours/Semester 1/High Performance Computing/Project/Chess-Game/Chess MPI'
+ 

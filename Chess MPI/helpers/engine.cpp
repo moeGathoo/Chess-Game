@@ -34,64 +34,6 @@ int evaluation(state* state) {
 }
 
 /**
- * @brief Performs minimax search algorithm for current side playing.
- * Searches all possible possible for current side to take (all possible moves to make)
- * in order to maximize move score while minimizing enemy move score.
- * 
- * @param currState State object containing current state of the board.
- * @param depth The depth to which the algorithm must search.
- * @param bestMove Pointer to a string containing the best move to make.
- * @param first Boolean indicating whether we are at root node of the search tree (true when called the first time, false otherwise)
- * 
- * @return int - Returns the maximum score out of all possible paths to take. The best recorded move based
- * off the returned score is stored in the bestMove variable.
- */
-int miniMax(state currState, int depth, string* bestMove, bool first) {
-    //stop searching if game state is over or depth of 0 is reached
-    if (currState.gameOver || depth <= 0) {
-        return evaluation(&currState);
-    }
-
-    int value = -10000000; //any large value to store maximum move score
-    //determine which side is playing
-    //generate all possible moves available for said side's current board
-    vector<cell*>* pieces; vector<string> moves;
-    if (currState.side == 'b') pieces = black;
-    else pieces = white;
-    for (int i = 0; i < PIECES; i++)
-        if (pieces[i].size() != 0)
-            for (cell* piece : pieces[i])
-                pieceMoves(&currState, piece, i, &moves);
-
-    //execute each move generated
-    for (string move : moves) {
-        //get moves start and goal spaces to move pieces based on positions in 'move' string
-        string start = move.substr(0,2);
-        int* startCoords = new int[2]; toCoords(start, startCoords);
-        string goal = move.substr(2,3);
-        int* goalCoords = new int[2]; toCoords(goal, goalCoords);
-        cell *startSpace = &board[startCoords[0]][startCoords[1]];
-        cell *goalSpace = &board[goalCoords[0]][goalCoords[1]];
-        delete[] startCoords; delete[] goalCoords;
-
-        state nextState = currState; //state after move is made
-        movePiece(startSpace, goalSpace); //move piece from start space to goal space
-        updateState(&nextState, goalSpace, (goalSpace->piece == 'p' || goalSpace->piece == 'P')); //update next state indicating move has been made
-        int eval = (-1)*miniMax(nextState, depth-1, bestMove, false); //evaulate state of board after move has been made
-        //undo move to restore current state's board
-        movePiece(goalSpace, startSpace);
-        resetBoard();
-        addPieces(currState.fen);
-        //determine if score returned is greater than current score, if so and at root node, set bestMove
-        if (eval > value) {
-            value = eval;
-            if (first) *bestMove = move;
-        }
-    }
-    return value;
-}
-
-/**
  * @brief Advanced evaulation function calculated from
  * all pieces on the board, possible moves available and attacking pieces.
  * 
@@ -172,7 +114,7 @@ int advEvaluation(state *state) {
  * @param alpha Alpha score value.
  * @param beta Beta score value.
  * @param bestMove Pointer to string that will store best move.
- * @param first Boolean indicating whether or not we are at root node (true when first called, false otherwise)
+ * @param first Boolean indicating whether or not we are at root node (true when first called, false otherwise).
  * 
  * @return int - Score after having search tree. The best move to make based on the score is stored
  * in the bestMove string.
@@ -225,3 +167,67 @@ int alphaBeta(state currState, int depth, int alpha, int beta, string *bestMove,
     return alpha;
 }
 
+/**
+ * @brief A parellel implementation of the alpha-beta pruning algorithm that makes use of
+ * multiple processors to return the most optimal move faster.
+ * 
+ * @param currState State object with current board information.
+ * @param size The number of processors in the communicator.
+ * @param rank Rank of the processor in the communicator.
+ * @param depth Depth to which the algorithm must search.
+ * @param alpha Alpha score value.
+ * @param beta Beta score value.
+ * @param bestMove Pointer to string containin the processor's determined best move
+ * @param first Boolean indicating whether or not we are at the root node
+ * @return int - Score after having search tree. The best move to make based on the score is stored
+ * in the bestMove string.
+ */
+int parallelAlphaBeta(state currState, int size, int rank, int depth, int alpha, int beta, string *bestMove, bool first) {
+    vector<string> myMoves; int pieceCount = 0;
+    int numCols = SIZE/size; //number of columns each processor will evaluate
+    int start = rank * numCols, stop = start + numCols; //which columns to work on
+    for (int r = 0; r < SIZE; r++) {
+        for (int c = start; c < stop; c++) {
+            cell* space = &board[r][c];
+            if (space->colour == currState.side) {
+                char piece = space->piece; if (currState.side == 'w') piece = tolower(piece);
+                char *foo = find(begin(pieceTypes), end(pieceTypes), piece); 
+                if (foo != end(pieceTypes)) { //lowercas piece type found, therefore black piece type
+                    int idx = distance(pieceTypes, foo); //index of piece type
+                    pieceMoves(&currState, space, idx, &myMoves);
+                }
+                pieceCount++;
+            }
+        }
+    }
+
+    for (string move : myMoves) {
+        //get moves start and goal spaces to move pieces based on positions in 'move' string
+        string start = move.substr(0,2);
+        int* startCoords = new int[2]; toCoords(start, startCoords);
+        string goal = move.substr(2,3);
+        int* goalCoords = new int[2]; toCoords(goal, goalCoords);
+        cell *startSpace = &board[startCoords[0]][startCoords[1]];
+        cell *goalSpace = &board[goalCoords[0]][goalCoords[1]];
+        delete[] startCoords; delete[] goalCoords;
+
+        state nextState = currState; //next state which will store board information after making move
+        movePiece(startSpace, goalSpace); //move piece
+        updateState(&nextState, goalSpace, false); //updates next state indicating move
+        int eval = (-1)*alphaBeta(nextState, depth-1, (-1)*beta, (-1)*alpha, bestMove, false); //calculate score of baord after move has been made
+        //undo move to restore board's original state
+        resetBoard();
+        addPieces(currState.fen);
+        //stop searching tree if evaluation is greater than beta threshold
+        if (eval >= beta){
+            return beta;
+        }
+        //assign current best move if at root node
+        if (eval > alpha){
+            alpha = eval;
+            if (first) *bestMove = move;
+        }
+    }
+
+    return alpha;
+}

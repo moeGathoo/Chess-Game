@@ -38,7 +38,11 @@ int main(int argc, char* argv[]) {
     //prints move made
     for (int i = 0; i < 10; i++) {
         string move;
+        auto start = chrono::steady_clock::now();
         alphaBeta(game, 4, -10001, 10001, &move, true);
+        auto end = chrono::steady_clock::now();
+        auto duration = chrono::duration_cast<chrono::seconds>(end - start).count();
+        cout << "Serial implementation time: " << duration << endl;
         checkMove(&game, &move);
         cout << move << endl;
         if (game.gameOver) break; //end game of game is over

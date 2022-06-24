@@ -75,9 +75,6 @@ bool checkMove(state *state, string *move);
 
 //engine functions
 int evaluation(state* state);
-int miniMax(state state, int depth, string* bestMove, bool first);
 int advEvaluation(state *state);
 int alphaBeta(state currState, int depth, int alpha, int beta, string* bestMove, bool first);
-
-//mpi
 int parallelAlphaBeta(state currState, int size, int rank, int depth, int alpha, int beta, string *bestMove, bool first);

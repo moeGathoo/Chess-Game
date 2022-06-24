@@ -9,7 +9,7 @@
 #include <string>
 #include <algorithm>
 #include <string>
-#include <omp.h>
+#include <chrono>
 
 //definitions used across project
 #define PIECES 6    //number of piece types
